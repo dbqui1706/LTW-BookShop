@@ -1,4 +1,4 @@
-package com.example.bookshopwebapplication.dao.mapper;
+package com.example.bookshopwebapplication.dao.mapper._interface;
 
 import java.sql.ResultSet;
 

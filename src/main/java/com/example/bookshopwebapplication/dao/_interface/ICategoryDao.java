@@ -1,2 +1,12 @@
-package com.example.bookshopwebapplication.dao._interface;public interface ICategoryDao {
+package com.example.bookshopwebapplication.dao._interface;
+
+import com.example.bookshopwebapplication.entities.Category;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface ICategoryDao extends IGenericDao<Category>{
+    List<Category> findAll();
+
+    Optional<Category> getByProductId(long id);
 }

@@ -1,12 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: DELL
-  Date: 11/4/2023
-  Time: 11:14 AM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <header class="section-header">
     <section class="header-main border-bottom">
         <div class="container">
@@ -46,8 +39,10 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/cart" class="nav-link text-body position-relative">
-                  <span id="total-cart-items-quantity" class="position-absolute top-0 end-0 mt-2 badge rounded-pill bg-primary">
+                                <a href="${pageContext.request.contextPath}/cart"
+                                   class="nav-link text-body position-relative">
+                  <span id="total-cart-items-quantity"
+                        class="position-absolute top-0 end-0 mt-2 badge rounded-pill bg-primary">
                     ...
                   </span>
                                     <i class="bi bi-cart d-block text-center fs-3 position-relative"></i>
@@ -60,5 +55,59 @@
             </div> <!-- row.// -->
         </div> <!-- container.// -->
     </section> <!-- header-main.// -->
-</header> <!-- section-header.// -->
+</header>
+<!-- section-header.// -->
 
+<nav class="navbar navbar-main navbar-expand-lg navbar-light border-bottom">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <strong><i class="bi bi-list"></i> Danh mục sản phẩm</strong>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Sách giáo khoa</a></li>
+                        <li><a class="dropdown-item" href="#">Sách khoa học</a></li>
+                        <li><a class="dropdown-item" href="#">Truyện tranh</a></li>
+                        <li><a class="dropdown-item" href="#">Tiểu thuyết</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Tất cả danh mục</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sản phẩm mới</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sản phẩm bán chạy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Khuyến mãi</a>
+                </li>
+            </ul>
+            <c:if test="${not empty sessionScope.currentUser}">
+                <span>Xin chào <strong>${sessionScope.currentUser.fullName}</strong>!</span>
+                <a class="btn btn-light ms-2" href="${pageContext.request.contextPath}/signout" role="button">
+                    Đăng xuất
+                </a>
+            </c:if>
+            <c:if test="${empty sessionScope.currentUser}">
+                <a class="btn btn-light me-2" href="${pageContext.request.contextPath}/signup" role="button">
+                    Đăng ký
+                </a>
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/signin" role="button">
+                    Đăng nhập
+                </a>
+            </c:if>
+        </div>
+    </div> <!-- container.// -->
+</nav>
+<!-- navbar-main.// -->

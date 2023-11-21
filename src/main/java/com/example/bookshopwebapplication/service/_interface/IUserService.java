@@ -1,4 +1,16 @@
-package com.example.bookshopwebapplication.service;
+package com.example.bookshopwebapplication.service._interface;
 
-public interface IUserService {
+import com.example.bookshopwebapplication.dto.UserDto;
+import com.example.bookshopwebapplication.entities.User;
+
+import java.util.Optional;
+
+public interface IUserService extends IService<UserDto> {
+    Optional<UserDto> getByUsername(String username);
+
+    void changePassword(long userId, String newPassword);
+
+    Optional<UserDto> getByEmail(String email);
+
+    Optional<UserDto> getByPhoneNumber(String phoneNumber);
 }
