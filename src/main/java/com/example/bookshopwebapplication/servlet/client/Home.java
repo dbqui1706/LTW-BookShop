@@ -27,14 +27,19 @@ import java.util.Optional;
 public class Home extends HttpServlet {
     private CategoryService categoryService = new CategoryService();
     private ProductService productService = new ProductService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Lấy danh sách danh mục sản phẩm
         List<CategoryDto> categories = categoryService.getPart(12, 0);
+
+        // Lấy danh sách sản phẩm được sắp xếp theo thời gian tạo giảm dần
         List<ProductDto> products = productService.getOrderedPart(12, 0, "createdAt", "DESC");
 
+        // Đặt danh sách danh mục và sản phẩm vào request để sử dụng trong trang JSP
         request.setAttribute("categories", categories);
         request.setAttribute("products", products);
+
+        // Chuyển hướng người dùng đến trang chủ
         request.getRequestDispatcher("/WEB-INF/views/client/home.jsp").forward(request, response);
     }
 }

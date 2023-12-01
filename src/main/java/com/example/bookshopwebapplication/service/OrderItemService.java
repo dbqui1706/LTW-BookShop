@@ -12,8 +12,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class OrderItemService implements IOrderItemService {
+
     private OrderItemDao orderItemDao = new OrderItemDao();
+
     private TOrderItem tOrderItem = new TOrderItem();
+
+    // Phương thức để chèn danh sách các đối tượng OrderItemDto
     @Override
     public void bulkInsert(List<OrderItemDto> orderItemDtoList) {
         for (OrderItemDto orderItemDto: orderItemDtoList){
@@ -21,11 +25,13 @@ public class OrderItemService implements IOrderItemService {
         }
     }
 
+    // Phương thức để lấy danh sách tên sản phẩm dựa trên orderId
     @Override
     public List<String> getProductNamesByOrderId(long orderId) {
         return orderItemDao.getProductNamesByOrderId(orderId);
     }
 
+    // Phương thức để lấy danh sách các đối tượng OrderItemDto dựa trên orderId
     @Override
     public List<OrderItemDto> getByOrderId(long orderId) {
         return orderItemDao.getByOrderId(orderId)
@@ -36,24 +42,27 @@ public class OrderItemService implements IOrderItemService {
                 .collect(Collectors.toList());
     }
 
-
+    // Phương thức để chèn một đối tượng OrderItemDto mới
     @Override
     public Optional<OrderItemDto> insert(OrderItemDto orderItemDto) {
         Long id = orderItemDao.save(tOrderItem.toEntity(orderItemDto));
         return getById(id);
     }
 
+    // Phương thức để cập nhật thông tin của một đối tượng OrderItemDto
     @Override
     public Optional<OrderItemDto> update(OrderItemDto orderItemDto) {
         orderItemDao.update(tOrderItem.toEntity(orderItemDto));
         return getById(orderItemDto.getId());
     }
 
+    // Phương thức để xóa các đối tượng OrderItem theo danh sách các id
     @Override
     public void delete(Long[] ids) {
         for (Long id: ids) orderItemDao.delete(id);
     }
 
+    // Phương thức để lấy đối tượng OrderItemDto dựa trên id
     @Override
     public Optional<OrderItemDto> getById(Long id) {
         Optional<OrderItem> orderItem = orderItemDao.getById(id);
@@ -69,15 +78,18 @@ public class OrderItemService implements IOrderItemService {
         return Optional.empty();
     }
 
+    // Phương thức để lấy một phần của danh sách đối tượng OrderItemDto
     @Override
     public List<OrderItemDto> getPart(Integer limit, Integer offset) {
-        return orderItemDao.getPart(limit, offset) .stream()
+        return orderItemDao.getPart(limit, offset)
+                .stream()
                 .map(orderItem -> getById(orderItem.getId()))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
     }
 
+    // Phương thức để lấy một phần của danh sách đối tượng OrderItemDto và sắp xếp theo thứ tự
     @Override
     public List<OrderItemDto> getOrderedPart(Integer limit, Integer offset, String orderBy, String sort) {
         return orderItemDao.getOrderedPart(limit, offset, orderBy, sort)

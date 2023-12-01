@@ -22,7 +22,7 @@ public class CartDao extends AbstractDao<Cart> implements ICartDao {
         return insert(builderSQL.toString(), new CartMapper(), cart.getUserId(), cart.getCreatedAt(),
                 cart.getUpdatedAt());
     }
-
+    // Cập nhật thông tin của một Cart đã tồn tại trong cơ sở dữ liệu
     public void update(Cart cart) {
         clearSQL();
         builderSQL.append(
@@ -88,6 +88,7 @@ public class CartDao extends AbstractDao<Cart> implements ICartDao {
 
     @Override
     public int countCartItemQuantityByUserId(long userId) {
+        // Đếm tổng số lượng Cart Item dựa trên userId
         clearSQL();
         builderSQL.append(
                 "SELECT SUM(ci.quantity) " +
@@ -100,6 +101,7 @@ public class CartDao extends AbstractDao<Cart> implements ICartDao {
     }
 
     @Override
+    // Đếm số lượng đơn hàng dựa trên userId
     public int countOrderByUserId(long userId) {
         clearSQL();
         builderSQL.append(
@@ -109,6 +111,7 @@ public class CartDao extends AbstractDao<Cart> implements ICartDao {
     }
 
     @Override
+    // Đếm số lượng đơn hàng đã giao dựa trên userId
     public int countOrderDeliverByUserId(long userId) {
         clearSQL();
         builderSQL.append(
@@ -120,6 +123,7 @@ public class CartDao extends AbstractDao<Cart> implements ICartDao {
     }
 
     @Override
+    // Đếm số lượng đơn hàng đã nhận dựa trên userId
     public int countOrderReceivedByUserId(long userId) {
         clearSQL();
         builderSQL.append(

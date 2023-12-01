@@ -23,7 +23,6 @@ public class SignIn extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/views/client/signin.jsp").forward(req, resp);
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Map<String, String> values = new HashMap<>();
@@ -33,13 +32,18 @@ public class SignIn extends HttpServlet {
         values.put("username", request.getParameter("username"));
         values.put("password", request.getParameter("password"));
 
+        // Kiểm tra xem người dùng có tồn tại không
         Optional<UserDto> userFromServer = UserService.getInstance().getByUsername(values.get("username"));
+
+        // Thực hiện xác minh tên tài khoản
         violations.put("usernameViolations", Validator.of(values.get("username"))
                 .isNotNullAndEmpty()
                 .isNotBlankAtBothEnds()
                 .isAtMostOfLength(25)
                 .isExistent(userFromServer == null ? false : true, "Tên đăng nhập")
                 .toList());
+
+        //xác minh mật khẩu
         violations.put("passwordViolations", Validator.of(values.get("password"))
                 .isNotNullAndEmpty()
                 .isNotBlankAtBothEnds()

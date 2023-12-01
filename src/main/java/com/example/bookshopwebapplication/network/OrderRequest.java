@@ -44,6 +44,7 @@ public class OrderRequest {
 
     @Override
     public String toString() {
+        //Nối nhiều chuỗi thành 1 chuỗi duy nhất
         return new StringJoiner(", ", OrderRequest.class.getSimpleName() + "[", "]")
                 .add("cartId=" + cartId)
                 .add("userId=" + userId)
