@@ -37,7 +37,10 @@ public class Home extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Lấy danh sách danh mục sản phẩm
         List<CategoryDto> categories = categoryService.getPart(12, 0);
+
+        // Lấy danh sách sản phẩm được sắp xếp theo thời gian tạo giảm dần
         List<ProductDto> products = productService.getOrderedPart(12, 0, "createdAt", "DESC");
 
         Optional<String> showCategories = Optional.ofNullable(request.getParameter("category"));
@@ -75,8 +78,11 @@ public class Home extends HttpServlet {
             return;
         }
 
+        // Đặt danh sách danh mục và sản phẩm vào request để sử dụng trong trang JSP
         request.setAttribute("categories", categories);
         request.setAttribute("products", products);
+
+        // Chuyển hướng người dùng đến trang chủ
         request.getRequestDispatcher("/WEB-INF/views/client/home.jsp").forward(request, response);
     }
 

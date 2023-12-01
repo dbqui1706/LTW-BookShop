@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class OrderItemDao extends AbstractDao<OrderItem> implements IOrderItemDao {
+
+    // Phương thức để lưu một đối tượng OrderItem vào cơ sở dữ liệu
     public Long save(OrderItem orderItem) {
         clearSQL();
         builderSQL.append(
@@ -24,6 +26,7 @@ public class OrderItemDao extends AbstractDao<OrderItem> implements IOrderItemDa
                 orderItem.getCreatedAt());
     }
 
+    // Phương thức để cập nhật thông tin một đối tượng OrderItem trong cơ sở dữ liệu
     public void update(OrderItem orderItem) {
         clearSQL();
         builderSQL.append(
@@ -39,18 +42,21 @@ public class OrderItemDao extends AbstractDao<OrderItem> implements IOrderItemDa
                 orderItem.getCreatedAt(), orderItem.getCreatedAt(), orderItem.getId());
     }
 
+    // Phương thức để xóa một đối tượng OrderItem khỏi cơ sở dữ liệu theo ID
     public void delete(Long id) {
         clearSQL();
         builderSQL.append("DELETE FROM order_item WHERE id = ?");
         update(builderSQL.toString(), id);
     }
 
+    // Phương thức để lấy một đối tượng OrderItem từ cơ sở dữ liệu theo ID
     public Optional<OrderItem> getById(Long id) {
         clearSQL();
         builderSQL.append("SELECT * FROM order_item WHERE id = ?");
         return Optional.ofNullable(query(builderSQL.toString(), new OrderItemMapper(), id).get(0));
     }
 
+    // Phương thức để lấy một phần danh sách OrderItem từ cơ sở dữ liệu với giới hạn và vị trí bắt đầu
     public List<OrderItem> getPart(Integer limit, Integer offset) {
         clearSQL();
         builderSQL.append("SELECT * FROM order_item LIMIT " + offset + ", " + limit);
@@ -58,7 +64,7 @@ public class OrderItemDao extends AbstractDao<OrderItem> implements IOrderItemDa
         return orderItems.isEmpty() ? new LinkedList<>() : orderItems;
     }
 
-    //int limit, int offset, String orderBy, String sort
+    // Phương thức để lấy một phần danh sách OrderItem từ cơ sở dữ liệu với sắp xếp theo các thuộc tính được chỉ định
     public List<OrderItem> getOrderedPart(Integer limit, Integer offset, String orderBy, String sort) {
         clearSQL();
         builderSQL.append("SELECT * FROM order_item ORDER BY " + orderBy + " " + sort);
@@ -73,11 +79,14 @@ public class OrderItemDao extends AbstractDao<OrderItem> implements IOrderItemDa
         );
         return count(builderSQL.toString());
     }
+
+    // Phương thức để thêm một danh sách OrderItem vào cơ sở dữ liệu
     @Override
     public void bulkInsert(List<OrderItem> orderItems) {
         for (OrderItem orderItem : orderItems) this.save(orderItem);
     }
 
+    // Phương thức để lấy danh sách tên sản phẩm từ cơ sở dữ liệu theo ID đơn hàng
     @Override
     public List<String> getProductNamesByOrderId(long orderId) {
         try {
@@ -97,10 +106,10 @@ public class OrderItemDao extends AbstractDao<OrderItem> implements IOrderItemDa
                 result.add(resultSet.getString("name"));
             }
             return result;
-        } catch (
-                SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
+            // Đảm bảo đóng các tài nguyên liên quan đến cơ sở dữ liệu
             try {
                 if (connection != null) {
                     connection.close();
@@ -117,6 +126,7 @@ public class OrderItemDao extends AbstractDao<OrderItem> implements IOrderItemDa
         }
     }
 
+    // Phương thức để lấy danh sách OrderItem từ cơ sở dữ liệu theo ID đơn hàng
     @Override
     public List<OrderItem> getByOrderId(long orderId) {
         clearSQL();

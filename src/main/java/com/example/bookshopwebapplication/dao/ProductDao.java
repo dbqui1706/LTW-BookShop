@@ -12,12 +12,12 @@ import java.util.Optional;
 
 public class ProductDao extends AbstractDao<Product> implements IProductDao {
 
+    // Phương thức để lưu một đối tượng Product vào cơ sở dữ liệu
     public Long save(Product product) {
-        // set new Query
         clearSQL();
         builderSQL.append("INSERT INTO product (name, price, discount, quantity, totalBuy, author, ");
         builderSQL.append("pages, publisher, yearPublishing, description, imageName, shop, createdAt, ");
-        builderSQL.append("updatedAt,  startsAt, endsAt) ");
+        builderSQL.append("updatedAt, startsAt, endsAt) ");
         builderSQL.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         return insert(builderSQL.toString(), product.getName(), product.getPrice(), product.getDiscount(),
                 product.getQuantity(), product.getTotalBuy(), product.getAuthor(), product.getPages(),
@@ -26,12 +26,13 @@ public class ProductDao extends AbstractDao<Product> implements IProductDao {
                 product.getStartsAt(), product.getEndsAt());
     }
 
+    // Phương thức để cập nhật thông tin một đối tượng Product trong cơ sở dữ liệu
     public void update(Product product) {
         clearSQL();
         builderSQL.append("UPDATE product SET name = ?, price = ?, discount = ?, quantity = ?, totalBuy = ?, author = ?, ");
         builderSQL.append("pages = ?, publisher = ?, yearPublishing = ?, description = ?, imageName = ?, " +
                 "shop = ?, createdAt = ?, ");
-        builderSQL.append("updatedAt = ?,  startsAt = ?, endsAt = ?) ");
+        builderSQL.append("updatedAt = ?, startsAt = ?, endsAt = ?) ");
         builderSQL.append("WHERE id = ?");
         update(builderSQL.toString(), product.getName(), product.getPrice(), product.getDiscount(),
                 product.getQuantity(), product.getTotalBuy(), product.getAuthor(), product.getPages(),
@@ -41,12 +42,14 @@ public class ProductDao extends AbstractDao<Product> implements IProductDao {
                 product.getEndsAt(), product.getId());
     }
 
+    // Phương thức để xóa một đối tượng Product khỏi cơ sở dữ liệu theo ID
     public void delete(Long id) {
         clearSQL();
         builderSQL.append("DELETE FROM product WHERE id = ?");
         update(builderSQL.toString(), id);
     }
 
+    // Phương thức để lấy một đối tượng Product từ cơ sở dữ liệu theo ID
     public Optional<Product> getById(Long id) {
         clearSQL();
         builderSQL.append("SELECT * FROM product WHERE id = ?");
@@ -54,13 +57,14 @@ public class ProductDao extends AbstractDao<Product> implements IProductDao {
         return products.isEmpty() ? Optional.empty() : Optional.ofNullable(products.get(0));
     }
 
+    // Phương thức để lấy một phần danh sách Product từ cơ sở dữ liệu với giới hạn và vị trí bắt đầu
     public List<Product> getPart(Integer limit, Integer offset) {
         clearSQL();
         builderSQL.append("SELECT * FROM product LIMIT " + offset + ", " + limit);
         return super.getPart(builderSQL.toString(), new ProductMapper());
     }
 
-    //int limit, int offset, String orderBy, String sort
+    // Phương thức để lấy một phần danh sách Product từ cơ sở dữ liệu với sắp xếp theo các thuộc tính được chỉ định
     public List<Product> getOrderedPart(Integer limit, Integer offset, String orderBy, String sort) {
         clearSQL();
         builderSQL.append("SELECT * FROM product ORDER BY " + orderBy + " " + sort);
@@ -74,12 +78,15 @@ public class ProductDao extends AbstractDao<Product> implements IProductDao {
         );
         return count(builderSQL.toString());
     }
+
+    // Phương thức để đếm số lượng sản phẩm theo ID của một danh mục
     public int countByCategoryId(Long id) {
         clearSQL();
         builderSQL.append("SELECT COUNT(productId) FROM product_category WHERE categoryId = ?");
         return count(builderSQL.toString(), id);
     }
 
+    // Phương thức để đếm số lượng sản phẩm theo ID của một danh mục và các điều kiện lọc
     @Override
     public int countByCategoryIdAndFilters(Long id, String filtersQuery) {
         clearSQL();
@@ -91,6 +98,7 @@ public class ProductDao extends AbstractDao<Product> implements IProductDao {
         return count(builderSQL.toString(), id);
     }
 
+    // Phương thức để lấy một phần danh sách Product từ cơ sở dữ liệu với sắp xếp theo các thuộc tính được chỉ định và theo ID của một danh mục
     @Override
     public List<Product> getOrderedPartByCategoryId(int limit, int offset, String orderBy, String sort, Long id) {
         clearSQL();
@@ -102,6 +110,7 @@ public class ProductDao extends AbstractDao<Product> implements IProductDao {
         return products.isEmpty() ? null : products;
     }
 
+    // Phương thức để lấy một phần danh sách Product từ cơ sở dữ liệu với sắp xếp theo các thuộc tính được chỉ định, theo ID của một danh mục và theo điều kiện lọc
     @Override
     public List<Product> getOrderedPartByCategoryIdAndFilters(int limit, int offset, String orderBy, String sort, Long id, String filtersQuery) {
         clearSQL();
@@ -118,6 +127,7 @@ public class ProductDao extends AbstractDao<Product> implements IProductDao {
         return products.isEmpty() ? new LinkedList<Product>() : products;
     }
 
+    // Phương thức để lấy danh sách các nhà xuất bản từ cơ sở dữ liệu theo ID của một danh mục
     @Override
     public List<String> getPublishersByCategoryId(Long id) {
         clearSQL();
@@ -138,10 +148,10 @@ public class ProductDao extends AbstractDao<Product> implements IProductDao {
                 result.add(resultSet.getString("publisher"));
             }
             return result;
-        } catch (
-                SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
+            // Đảm bảo đóng các tài nguyên liên quan đến cơ sở dữ liệu
             try {
                 if (connection != null) {
                     connection.close();
@@ -158,6 +168,7 @@ public class ProductDao extends AbstractDao<Product> implements IProductDao {
         }
     }
 
+    // Phương thức để lấy một phần danh sách Product từ cơ sở dữ liệu với sắp xếp ngẫu nhiên, theo ID của một danh mục
     @Override
     public List<Product> getRandomPartByCategoryId(int limit, int offset, Long categoryId) {
         clearSQL();
@@ -172,6 +183,7 @@ public class ProductDao extends AbstractDao<Product> implements IProductDao {
         return products.isEmpty() ? new LinkedList<>() : products;
     }
 
+    // Phương thức để lấy danh sách Product từ cơ sở dữ liệu theo ID của một danh mục
     @Override
     public List<Product> getProductsByCategoryId(Long categoryId) {
         clearSQL();

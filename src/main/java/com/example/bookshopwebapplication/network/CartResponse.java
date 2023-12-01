@@ -18,6 +18,7 @@ public class CartResponse {
 
     @Override
     public String toString() {
+        //Nối nhiều chuỗi thành 1 chuỗi duy nhất
         return new StringJoiner(", ", CartResponse.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
                 .add("userId=" + userId)

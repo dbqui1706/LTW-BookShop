@@ -42,5 +42,5 @@ if (currentUserIdMetaTag) {
         button.addEventListener("click", () => deleteWishlistItem(id))
     })
 } else {
-    // deleteWishlistItemBtn.addEventListener("click", noneSignInEvent)
+    deleteWishlistItemBtn.addEventListener("click", noneSignInEvent)
 }

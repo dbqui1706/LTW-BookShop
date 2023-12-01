@@ -34,9 +34,11 @@ public class WishlistServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Lấy thông tin người dùng
         UserDto user = (UserDto) request.getSession().getAttribute("currentUser");
-
+        // Kiểm tra xem người dùng đã đăng nhập chưa
         if (user != null) {
+            // Lấy danh sách mục yêu thích của người dùng
             List<WishlistItemDto> wishlistItems = wishlistItemService.getByUserId(user.getId());
             int totalWishItem = wishlistItems.size();
             String pageParam = Optional.ofNullable(request.getParameter("page")).orElse("1");
@@ -47,11 +49,15 @@ public class WishlistServlet extends HttpServlet {
             wishlistItems = wishlistItemService.getOrderedPartByUserId(user.getId(),
                     WISH_ITEM_PER_PAGE, offset, "createdAt", "DESC"
             );
+            // Lấy thông tin chi tiết của từng sản phẩm trong danh sách yêu thích
+            for (WishlistItemDto wishlistItem : wishlistItems.isEmpty() ? new LinkedList<WishlistItemDto>() : wishlistItems) {
+                ProductDto product = productService.getById(wishlistItem.getProduct().getId()).orElseGet(ProductDto::new);
+                wishlistItem.setProduct(product);
+            }
             request.setAttribute("wishlistItems", wishlistItems);
             request.setAttribute("totalPage", totalPage);
             request.setAttribute("page", page);
         }
-
         request.getRequestDispatcher("/WEB-INF/views/client/wishlist.jsp").forward(request, response);
     }
 
@@ -81,32 +87,47 @@ public class WishlistServlet extends HttpServlet {
         }
     }
 
+//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        Long id = Long.parseLong(request.getParameter("id"));
+//        //xóa mục yêu thích
+//        wishlistItemService.delete(new Long[]{id});
+//        response.sendRedirect(request.getContextPath() + "/wishlist");
+//    }
+
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        WishlistItemRequest wishlistItemRequest = JsonUtils.get(request, WishlistItemRequest.class);
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            // Đọc dữ liệu yêu thích từ yêu cầu dưới định dạng JSON
+            WishlistItemRequest wishlistItemRequest = JsonUtils.get(request, WishlistItemRequest.class);
+            String successMessage = "Đã thêm sản phẩm vào danh sách yêu thích thành công!";
+            String errorMessage = "Đã có lỗi truy vấn!";
 
-        String successMessage = "Đã thêm sản phẩm vào danh sách yêu thích thành công!";
-        String errorMessage = "Đã có lỗi truy vấn!";
+            // Hàm thực hiện khi thành công
+            Runnable doneFunction = () -> JsonUtils.out(
+                    response,
+                    new Message(200, successMessage),
+                    HttpServletResponse.SC_OK);
 
-        Runnable doneFunction = () -> JsonUtils.out(
-                response,
-                new Message(200, successMessage),
-                HttpServletResponse.SC_OK);
-        Runnable failFunction = () -> JsonUtils.out(
-                response,
-                new Message(404, errorMessage),
-                HttpServletResponse.SC_NOT_FOUND);
+            // Hàm thực hiện khi thất bại
+            Runnable failFunction = () -> JsonUtils.out(
+                    response,
+                    new Message(404, errorMessage),
+                    HttpServletResponse.SC_NOT_FOUND);
 
-        WishlistItemDto wishlistItem = new WishlistItemDto();
-        wishlistItem.setUser(
-                userService.getById(wishlistItemRequest.getUserId()).get()
-        );
-        wishlistItem.setProduct(
-                productService.getById(wishlistItemRequest.getProductId()).get()
-        );
+            // Tạo đối tượng mục yêu thích từ dữ liệu yêu cầu
+            WishlistItemDto wishlistItem = new WishlistItemDto();
+            wishlistItem.setUser(
+                    userService.getById(wishlistItemRequest.getUserId()).get()
+            );
+            wishlistItem.setProduct(
+                    productService.getById(wishlistItemRequest.getProductId()).get()
+            );
 
-        Protector.of(() -> wishlistItemService.insert(wishlistItem))
-                .done(r -> doneFunction.run())
-                .fail(e -> failFunction.run());
+            Protector.of(() -> wishlistItemService.insert(wishlistItem))
+                    .done(r -> doneFunction.run())
+                    .fail(e -> failFunction.run());
+            // thêm mục yêu thích
+            Optional<WishlistItemDto> res = wishlistItemService.insert(wishlistItem);
+            if (res.isPresent()) doneFunction.run();
+            else failFunction.run();
+        }
     }
-}

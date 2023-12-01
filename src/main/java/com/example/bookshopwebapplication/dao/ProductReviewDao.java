@@ -11,8 +11,9 @@ import java.util.Optional;
 
 public class ProductReviewDao extends AbstractDao<ProductReview> implements IProductReviewDao {
 
+    // Phương thức để lưu đánh giá sản phẩm mới vào cơ sở dữ liệu
     public Long save(ProductReview pr) {
-        // set new Query
+        // Thiết lập câu truy vấn mới
         clearSQL();
         builderSQL.append(
                 "INSERT INTO product_review (userId, productId, ratingScore, content, isShow" +
@@ -23,6 +24,7 @@ public class ProductReviewDao extends AbstractDao<ProductReview> implements IPro
                 pr.getContent(), pr.getIsShow(), pr.getCreatedAt(), new Timestamp(System.currentTimeMillis()));
     }
 
+    // Phương thức để cập nhật thông tin đánh giá sản phẩm trong cơ sở dữ liệu
     public void update(ProductReview pr) {
         clearSQL();
         builderSQL.append(
@@ -33,12 +35,14 @@ public class ProductReviewDao extends AbstractDao<ProductReview> implements IPro
         update(builderSQL.toString(), pr.getRatingScore(), pr.getContent(), pr.getUpdatedAt(), pr.getId());
     }
 
+    // Phương thức để xóa đánh giá sản phẩm từ cơ sở dữ liệu
     public void delete(Long id) {
         clearSQL();
         builderSQL.append("DELETE FROM product_review WHERE id = ?");
         update(builderSQL.toString(), id);
     }
 
+    // Phương thức để lấy đánh giá sản phẩm dựa trên ID
     public Optional<ProductReview> getById(Long id) {
         clearSQL();
         builderSQL.append("SELECT * FROM product_review WHERE id = ?");
@@ -46,13 +50,14 @@ public class ProductReviewDao extends AbstractDao<ProductReview> implements IPro
         return list.isEmpty() ? null: Optional.ofNullable(list.get(0));
     }
 
+    // Phương thức để lấy một phần danh sách đánh giá sản phẩm từ cơ sở dữ liệu
     public List<ProductReview> getPart(Integer limit, Integer offset) {
         clearSQL();
         builderSQL.append("SELECT * FROM product_review LIMIT " + offset + ", " + limit);
         return super.getPart(builderSQL.toString(), new ProductReviewMapper());
     }
 
-    //int limit, int offset, String orderBy, String sort
+    // Phương thức để lấy một phần danh sách đánh giá sản phẩm từ cơ sở dữ liệu với sắp xếp
     public List<ProductReview> getOrderedPart(Integer limit, Integer offset, String orderBy, String sort) {
         clearSQL();
         builderSQL.append("SELECT * FROM product_review ORDER BY " + orderBy + " " + sort);
@@ -60,6 +65,7 @@ public class ProductReviewDao extends AbstractDao<ProductReview> implements IPro
         return super.getOrderedPart(builderSQL.toString(), new ProductReviewMapper());
     }
 
+    // Phương thức để đếm số lượng đánh giá sản phẩm trong cơ sở dữ liệu
     public int count() {
         clearSQL();
         builderSQL.append(
@@ -68,6 +74,7 @@ public class ProductReviewDao extends AbstractDao<ProductReview> implements IPro
         return count(builderSQL.toString());
     }
 
+    // Phương thức để lấy một phần danh sách đánh giá sản phẩm từ cơ sở dữ liệu với sắp xếp theo sản phẩm và giới hạn số lượng
     @Override
     public List<ProductReview> getOrderedPartByProductId(int limit, int offset, String orderBy, String sort, long productId) {
         clearSQL();
@@ -83,6 +90,7 @@ public class ProductReviewDao extends AbstractDao<ProductReview> implements IPro
         return productReviews.isEmpty() ? new LinkedList<>() : productReviews;
     }
 
+    // Phương thức để đếm số lượng đánh giá sản phẩm dựa trên ID sản phẩm
     @Override
     public int countByProductId(long productId) {
         clearSQL();
@@ -92,6 +100,7 @@ public class ProductReviewDao extends AbstractDao<ProductReview> implements IPro
         return count(builderSQL.toString(), productId);
     }
 
+    // Phương thức để tính tổng điểm đánh giá sản phẩm dựa trên ID sản phẩm
     @Override
     public int sumRatingScoresByProductId(long productId) {
         clearSQL();
@@ -101,6 +110,7 @@ public class ProductReviewDao extends AbstractDao<ProductReview> implements IPro
         return count(builderSQL.toString(), productId);
     }
 
+    // Phương thức để ẩn một đánh giá sản phẩm dựa trên ID
     @Override
     public void hide(long id) {
         clearSQL();
@@ -112,6 +122,7 @@ public class ProductReviewDao extends AbstractDao<ProductReview> implements IPro
         update(builderSQL.toString(), id);
     }
 
+    // Phương thức để hiển thị một đánh giá sản phẩm dựa trên ID
     @Override
     public void show(long id) {
         clearSQL();

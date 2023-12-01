@@ -36,6 +36,7 @@ public class OrderItemRequest {
 
     @Override
     public String toString() {
+        //Nối nhiều chuỗi thành 1 chuỗi duy nhất
         return new StringJoiner(", ", OrderItemRequest.class.getSimpleName() + "[", "]")
                 .add("productId=" + productId)
                 .add("price=" + price)

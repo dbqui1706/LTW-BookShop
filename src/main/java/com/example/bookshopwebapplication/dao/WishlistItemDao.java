@@ -10,8 +10,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class WishlistItemDao extends AbstractDao<WishListItem> implements IWishlistItemDao {
+
+    // Phương thức để lưu một mục Wishlist mới vào cơ sở dữ liệu
     public Long save(WishListItem wishListItem) {
-        // set new Query
+        // Thiết lập câu truy vấn mới
         clearSQL();
         builderSQL.append(
                 "INSERT INTO wishlist_item (userId, productId, createdAt) " +
@@ -21,6 +23,7 @@ public class WishlistItemDao extends AbstractDao<WishListItem> implements IWishl
                 wishListItem.getProductId(), new Timestamp(System.currentTimeMillis()));
     }
 
+    // Phương thức để cập nhật thông tin một mục Wishlist trong cơ sở dữ liệu
     public void update(WishListItem wishListItem) {
         clearSQL();
         builderSQL.append(
@@ -32,12 +35,14 @@ public class WishlistItemDao extends AbstractDao<WishListItem> implements IWishl
                 wishListItem.getProductId());
     }
 
+    // Phương thức để xóa một mục Wishlist từ cơ sở dữ liệu dựa trên ID
     public void delete(Long id) {
         clearSQL();
         builderSQL.append("DELETE FROM wishlist_item WHERE id = ?");
         update(builderSQL.toString(), id);
     }
 
+    // Phương thức để lấy thông tin một mục Wishlist dựa trên ID
     public Optional<WishListItem> getById(Long id) {
         clearSQL();
         builderSQL.append("SELECT * FROM wishlist_item WHERE id = ?");
@@ -45,13 +50,14 @@ public class WishlistItemDao extends AbstractDao<WishListItem> implements IWishl
         return wishListItems.isEmpty() ? Optional.empty() : Optional.ofNullable(wishListItems.get(0));
     }
 
+    // Phương thức để lấy một phần danh sách mục Wishlist từ cơ sở dữ liệu
     public List<WishListItem> getPart(Integer limit, Integer offset) {
         clearSQL();
         builderSQL.append("SELECT * FROM wishlist_item LIMIT " + offset + ", " + limit);
         return super.getPart(builderSQL.toString(), new WishlistItemMapper());
     }
 
-    //int limit, int offset, String orderBy, String sort
+    // Phương thức để lấy một phần danh sách mục Wishlist từ cơ sở dữ liệu với sắp xếp
     public List<WishListItem> getOrderedPart(Integer limit, Integer offset, String orderBy, String sort) {
         clearSQL();
         builderSQL.append("SELECT * FROM wishlist_item ORDER BY " + orderBy + " " + sort);
@@ -59,6 +65,7 @@ public class WishlistItemDao extends AbstractDao<WishListItem> implements IWishl
         return super.getOrderedPart(builderSQL.toString(), new WishlistItemMapper());
     }
 
+    // Phương thức để đếm tổng số lượng mục Wishlist trong cơ sở dữ liệu
     public int count() {
         clearSQL();
         builderSQL.append(
@@ -67,6 +74,7 @@ public class WishlistItemDao extends AbstractDao<WishListItem> implements IWishl
         return count(builderSQL.toString());
     }
 
+    // Phương thức để lấy danh sách mục Wishlist dựa trên ID người dùng
     @Override
     public List<WishListItem> getByUserId(long userId) {
         clearSQL();
@@ -77,6 +85,7 @@ public class WishlistItemDao extends AbstractDao<WishListItem> implements IWishl
         return wishListItems.isEmpty() ? new LinkedList<>() : wishListItems;
     }
 
+    // Phương thức để đếm số lượng mục Wishlist dựa trên ID người dùng và ID sản phẩm
     @Override
     public List<WishListItem> getOrderedPartByUserId(long userId, Integer limit, Integer offset, String orderBy, String sort) {
         clearSQL();

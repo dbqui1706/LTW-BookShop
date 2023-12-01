@@ -77,14 +77,14 @@ public class UserService implements IUserService {
     public void changePassword(long userId, String newPassword) {
         userDao.changePassword(userId, newPassword);
     }
-
+    // Phương thức để lấy đối tượng UserDto dựa trên địa chỉ email
     @Override
     public Optional<UserDto> getByEmail(String email) {
         Optional<User> user = userDao.getByEmail(email);
         if (user.isPresent()) return Optional.of(tUser.toDto(user.get()));
         return Optional.empty();
     }
-
+    // Phương thức để lấy đối tượng UserDto dựa trên số điện thoại
     @Override
     public Optional<UserDto> getByPhoneNumber(String phoneNumber) {
         Optional<User> user = userDao.getByPhoneNumber(phoneNumber);
