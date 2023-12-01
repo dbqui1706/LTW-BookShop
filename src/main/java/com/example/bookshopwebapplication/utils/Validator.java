@@ -30,7 +30,8 @@ public class Validator<T> {
     }
 
     public Validator<T> isNotNullAndEmpty() {
-        Optional<String> violation = o != null && !String.valueOf(o).trim().isEmpty() ? Optional.empty() : Optional.of("Không để trống");
+        Optional<String> violation = o != null && !String.valueOf(o).trim().isEmpty()
+                ? Optional.empty() : Optional.of("Không để trống");
         violation.ifPresent(violations::add);
         return this;
     }
@@ -76,13 +77,15 @@ public class Validator<T> {
     }
 
     public Validator<T> isNotExistent(boolean existence, String subjectName) {
-        Optional<String> violation = !existence ? Optional.empty() : Optional.of(String.format("%s đã tồn tại", subjectName));
+        Optional<String> violation = !existence ? Optional.empty() :
+                Optional.of(String.format("%s đã tồn tại", subjectName));
         violation.ifPresent(violations::add);
         return this;
     }
 
     public Validator<T> isExistent(boolean existence, String subjectName) {
-        Optional<String> violation = existence ? Optional.empty() : Optional.of(String.format("%s chưa tồn tại", subjectName));
+        Optional<String> violation = existence ? Optional.empty() :
+                Optional.of(String.format("%s chưa tồn tại", subjectName));
         violation.ifPresent(violations::add);
         return this;
     }

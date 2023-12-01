@@ -6,6 +6,7 @@ import com.example.bookshopwebapplication.dao.mapper.UserMapper;
 import com.example.bookshopwebapplication.entities.Product;
 import com.example.bookshopwebapplication.entities.User;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +24,7 @@ public class UserDao extends AbstractDao<User> implements IUserDao {
     public void update(User user) {
         clearSQL();
         builderSQL.append("UPDATE user SET username = ?, password = ?, fullname = ?, email = ?, ");
-        builderSQL.append("phoneNumber = ?, gender = ?, address = ?, role = ?)");
+        builderSQL.append("phoneNumber = ?, gender = ?, address = ?, role = ? ");
         builderSQL.append("WHERE id = ?");
         update(builderSQL.toString(), user.getUsername(), user.getPassword(), user.getFullName(),
                 user.getEmail(), user.getPhoneNumber(), user.getGender(), user.getAddress(), user.getRole(),
@@ -87,6 +88,16 @@ public class UserDao extends AbstractDao<User> implements IUserDao {
         builderSQL.append("SELECT * FROM user WHERE phoneNumber = ?");
         List<User> users = query(builderSQL.toString(), new UserMapper(), phoneNumber);
         return users.isEmpty() ? null : Optional.ofNullable(users.get(0));
+    }
+
+    @Override
+    public List<User> getAll() {
+        clearSQL();
+        builderSQL.append(
+                "SELECT * FROM user"
+        );
+        List<User> users = query(builderSQL.toString(), new UserMapper());
+        return users.isEmpty() ? new ArrayList<>(): users;
     }
 
     public int count() {

@@ -15,7 +15,7 @@
 </head>
 
 <body>
-<jsp:include page="/common/header.jsp"/>
+<jsp:include page="/common/client/header.jsp"/>
 
 <section class="section-pagetop-2 bg-light">
     <div class="container">
@@ -162,22 +162,18 @@
                                     <div class="ratting-author float-start">
                                         <h5 class="float-start me-3">${productReview.user.fullName}</h5>
                                         <span>
-<%--                      <fmt:parseDate value="${productReview.createdAt}"--%>
-<%--                                     pattern="yyyy-MM-dd'T'HH:mm" var="parsedCreatedAt"--%>
-<%--                                     type="both"/>--%>
-                      <fmt:formatDate type="date" value="${productReview.createdAt}"/>
-                    </span>
+                                            <fmt:formatDate type="date" value="${productReview.createdAt}"/>
+                                        </span>
                                     </div>
                                     <div class="ratting-star float-end">
-                    <span class="rating-stars me-2">
-                      <c:forEach begin="1" end="5" step="1" var="i">
-                          <i class="bi bi-star-fill ${i <= productReview.ratingScore ? 'active' : ''}"></i>
-                      </c:forEach>
-                    </span>
+                                        <span class="rating-stars me-2">
+                                          <c:forEach begin="1" end="5" step="1" var="i">
+                                              <i class="bi bi-star-fill ${i <= productReview.ratingScore ? 'active' : ''}"></i>
+                                          </c:forEach>
+                                        </span>
                                         <span>(${productReview.ratingScore})</span>
                                     </div>
                                 </div>
-
                                 <div>
                                     <c:choose>
                                         <c:when test="${productReview.isShow == 1}">
@@ -188,28 +184,9 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </div>
-
-                                <c:if test="${productReview.user.id == sessionScope.currentUser.id}">
-                                    <form action="${pageContext.request.contextPath}/deleteProductReview"
-                                          method="post">
-                                        <input type="hidden" name="productReviewId" value="${productReview.id}">
-                                        <input type="hidden" name="productId" value="${requestScope.product.id}">
-                                        <div class="btn-group" role="group">
-                                            <a href="${pageContext.request.contextPath}/editProductReview?id=${productReview.id}"
-                                               role="button"
-                                               class="btn btn-primary btn-sm">
-                                                Sửa
-                                            </a>
-                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Bạn có muốn xóa?')">Xóa
-                                            </button>
-                                        </div>
-                                    </form>
-                                </c:if>
                             </div>
                         </c:forEach>
-
-                        <nav class="mt-4">
+                        <nav class="mt-4 d-flex justify-content-center">
                             <ul class="pagination">
                                 <li class="page-item ${requestScope.pageReview == 1 ? 'disabled' : ''}">
                                     <a class="page-link"
@@ -260,8 +237,8 @@
                                 <form action="${pageContext.request.contextPath}/addProductReview" method="post">
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
-                                            <select class="form-select ${not empty sessionScope.violations.ratingScoreViolations
-                                ? 'is-invalid' : (not empty sessionScope.values.ratingScore ? 'is-valid' : '')}"
+                                            <select class="form-select ${not empty sessionScope.violations.ratingScoreViolations ?
+                                             'is-invalid' : (not empty sessionScope.values.ratingScore ? 'is-valid' : '')}"
                                                     name="ratingScore">
                                                 <option disabled ${not empty sessionScope.values.ratingScore ? '' : 'selected'}>
                                                     Cho sao
@@ -284,11 +261,12 @@
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col">
-                      <textarea class="form-control ${not empty sessionScope.violations.contentViolations
-                                  ? 'is-invalid' : (not empty sessionScope.values.content ? 'is-valid' : '')}"
-                                name="content"
-                                placeholder="Nội dung đánh giá"
-                                rows="3">${sessionScope.values.content}</textarea>
+                                            <textarea class="form-control ${not empty sessionScope.violations.contentViolations
+                                                ? 'is-invalid' : (not empty sessionScope.values.content ? 'is-valid' : '')}"
+                                                name="content"
+                                                placeholder="Nội dung đánh giá"
+                                                rows="3">${sessionScope.values.content}
+                                            </textarea>
                                             <c:if test="${not empty sessionScope.violations.contentViolations}">
                                                 <div class="invalid-feedback">
                                                     <ul class="list-unstyled mb-0">
@@ -384,7 +362,7 @@
     </div> <!-- container.// -->
 </section> <!-- section-content.// -->
 
-<jsp:include page="/common/footer.jsp"/>
+<jsp:include page="/common/client/footer.jsp"/>
 
 <div class="toast-container position-fixed bottom-0 start-0 p-3"></div> <!-- toast-container.// -->
 

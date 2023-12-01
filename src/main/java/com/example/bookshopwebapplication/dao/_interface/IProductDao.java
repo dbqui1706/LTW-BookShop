@@ -14,4 +14,6 @@ public interface IProductDao extends IGenericDao<Product>{
 
     List<Product> getRandomPartByCategoryId(int limit, int offset, Long categoryId);
     List<Product> getProductsByCategoryId(Long id);
+    int countByQuery(String query);
+    List<Product> getByQuery(String query, int limit, int offset);
 }

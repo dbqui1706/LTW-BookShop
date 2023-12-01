@@ -19,7 +19,7 @@
         </a>
         <a class="list-group-item ${param.active == 'SETTING' ? 'active' : ''}"
            href="${pageContext.request.contextPath}/setting" role="button">
-            Thiết đặt
+            Cài đặt
         </a>
         <a class="list-group-item" href="${pageContext.request.contextPath}/signout" role="button">Đăng xuất</a>
     </nav>

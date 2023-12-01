@@ -73,6 +73,11 @@ public class CartService implements ICartService {
     }
 
     @Override
+    public int count() {
+        return cartDao.count();
+    }
+
+    @Override
     public Optional<CartDto> getByUserId(long userId) {
         Optional<Cart> cart = cartDao.getByUserId(userId);
         if (cart.isPresent()){

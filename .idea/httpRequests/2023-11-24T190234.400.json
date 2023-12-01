@@ -1,0 +1,4 @@
+{
+  "statusCode": 400,
+  "message": "java.lang.NullPointerException: Cannot invoke \"java.util.Optional.isPresent()\" because \"category\" is null"
+}

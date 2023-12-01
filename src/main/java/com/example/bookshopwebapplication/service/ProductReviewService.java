@@ -67,6 +67,11 @@ public class ProductReviewService implements IProductReviewService {
     }
 
     @Override
+    public int count() {
+        return productReviewDao.count();
+    }
+
+    @Override
     public List<ProductReviewDto> getOrderedPartByProductId(int limit, int offset, String orderBy, String sort, long productId) {
         return productReviewDao.getOrderedPartByProductId(limit, offset, orderBy, sort, productId)
                 .stream()

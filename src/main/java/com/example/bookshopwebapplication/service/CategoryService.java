@@ -7,6 +7,7 @@ import com.example.bookshopwebapplication.entities.Category;
 import com.example.bookshopwebapplication.service._interface.ICategoryService;
 import com.example.bookshopwebapplication.service.transferObject.ITransfer;
 import com.example.bookshopwebapplication.service.transferObject.TCategory;
+import com.example.bookshopwebapplication.utils.Protector;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,10 +16,15 @@ import java.util.stream.Collectors;
 public class CategoryService implements ICategoryService {
     private CategoryDao categoryDao = new CategoryDao();
     private TCategory tCategory = new TCategory();
+    private final static CategoryService instance = new CategoryService();
+
+    public static CategoryService getInstance() {
+        return instance;
+    }
 
     @Override
     public Optional<CategoryDto> getById(Long id) {
-        Optional<Category> category = categoryDao.getById(id);
+        Optional<Category> category = Protector.of(() -> categoryDao.getById(id)).get(Optional::empty);
         if (category.isPresent()) {
             CategoryDto categoryDto = tCategory.toDto(category.get());
             categoryDto.setProducts(ProductService.getInstance()
@@ -63,6 +69,11 @@ public class CategoryService implements ICategoryService {
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public int count() {
+        return categoryDao.count();
     }
 
     public List<Category> getAll() {

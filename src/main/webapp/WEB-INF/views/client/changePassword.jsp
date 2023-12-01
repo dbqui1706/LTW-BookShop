@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<jsp:include page="/common/header.jsp"/>
+<jsp:include page="/common/client/header.jsp"/>
 
 <section class="section-pagetop bg-light">
     <div class="container">
@@ -29,7 +29,7 @@
                     </p>
                 </c:when>
                 <c:otherwise>
-                    <jsp:include page="/common/navPanel.jsp">
+                    <jsp:include page="/common/client/navPanel.jsp">
                         <jsp:param name="active" value="CHANGE_PASSWORD"/>
                     </jsp:include>
 
@@ -83,7 +83,7 @@
     </div> <!-- container.// -->
 </section> <!-- section-content.// -->
 
-<jsp:include page="/common/footer.jsp"/>
+<jsp:include page="/common/client/footer.jsp"/>
 </body>
 
 </html>

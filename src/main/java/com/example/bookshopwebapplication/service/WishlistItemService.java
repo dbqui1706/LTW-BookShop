@@ -72,10 +72,23 @@ public class WishlistItemService implements IWishlistItemService {
     }
 
     @Override
+    public int count() {
+        return wishlistItemDao.count();
+    }
+
+    @Override
     public List<WishlistItemDto> getByUserId(long userId) {
-
-
         return wishlistItemDao.getByUserId(userId)
+                .stream()
+                .map(wishListItem -> getById(wishListItem.getId()))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<WishlistItemDto> getOrderedPartByUserId(long userId, Integer limit, Integer offset, String orderBy, String sort) {
+        return wishlistItemDao.getOrderedPartByUserId(userId, limit, offset, orderBy, sort)
                 .stream()
                 .map(wishListItem -> getById(wishListItem.getId()))
                 .filter(Optional::isPresent)

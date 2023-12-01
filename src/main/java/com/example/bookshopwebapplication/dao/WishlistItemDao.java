@@ -78,6 +78,19 @@ public class WishlistItemDao extends AbstractDao<WishListItem> implements IWishl
     }
 
     @Override
+    public List<WishListItem> getOrderedPartByUserId(long userId, Integer limit, Integer offset, String orderBy, String sort) {
+        clearSQL();
+        builderSQL.append(
+                "SELECT * FROM wishlist_item " +
+                        "WHERE userId = ? " +
+                        "ORDER BY " + orderBy + " " + sort + " " +
+                        "LIMIT " + offset + ", " + limit + " "
+        );
+        List<WishListItem> wishListItems = query(builderSQL.toString(), new WishlistItemMapper(), userId);
+        return wishListItems.isEmpty() ? new LinkedList<>() : wishListItems;
+    }
+
+    @Override
     public int countByUserIdAndProductId(Long userId, Long productId) {
         clearSQL();
         builderSQL.append(

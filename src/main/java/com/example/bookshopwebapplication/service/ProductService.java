@@ -65,6 +65,11 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    public int count() {
+        return productDao.count();
+    }
+
+    @Override
     public int countByCategoryId(long categoryId) {
         return productDao.countByCategoryId(categoryId);
     }
@@ -102,6 +107,20 @@ public class ProductService implements IProductService {
         return productDao.getProductsByCategoryId(categoryId)
                 .stream().map(product -> tProduct.toDto(product))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public int countByQuery(String query) {
+        return productDao.countByQuery(query);
+    }
+
+    @Override
+    public List<ProductDto> getByQuery(String query, int limit, int offset) {
+        return productDao.getByQuery(query, limit, offset)
+                .stream()
+                .map(product -> getById(product.getId()))
+                .filter(Optional::isPresent)
+                .map(Optional::get).collect(Collectors.toList());
     }
 
     @Override

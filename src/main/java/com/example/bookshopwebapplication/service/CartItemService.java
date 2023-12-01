@@ -91,4 +91,9 @@ public class CartItemService implements ICartItemService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public int count() {
+        return cartItemDao.count();
+    }
+
 }

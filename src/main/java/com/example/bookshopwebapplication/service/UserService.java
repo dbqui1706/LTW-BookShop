@@ -60,6 +60,11 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public int count() {
+        return userDao.count();
+    }
+
+    @Override
     public Optional<UserDto> getByUsername(String username) {
         Optional<User> user = userDao.getByNameUser(username);
         if (user.isPresent()) {
@@ -86,4 +91,27 @@ public class UserService implements IUserService {
         if (user.isPresent()) return Optional.of(tUser.toDto(user.get()));
         return Optional.empty();
     }
+
+    @Override
+    public List<String> getAllUsername() {
+        return userDao.getAll().stream()
+                .map(user -> user.getUsername())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String> getAllEmails() {
+        return userDao.getAll().stream()
+                .map(user -> user.getEmail())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String> getAllPhones() {
+        return userDao.getAll().stream()
+                .map(user -> user.getPhoneNumber())
+                .collect(Collectors.toList());
+    }
+
+
 }

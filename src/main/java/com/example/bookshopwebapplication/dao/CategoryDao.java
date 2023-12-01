@@ -57,18 +57,24 @@ public class CategoryDao extends AbstractDao<Category> implements ICategoryDao {
 
     public List<Category> getPart(Integer limit, Integer offset) {
         clearSQL();
-        builderSQL.append("SELECT * FROM product LIMIT " + offset + ", " + limit);
+        builderSQL.append("SELECT * FROM category LIMIT " + offset + ", " + limit);
         return query(builderSQL.toString(), new CategoryMapper());
     }
 
     //int limit, int offset, String orderBy, String sort
     public List<Category> getOrderedPart(Integer limit, Integer offset, String orderBy, String sort) {
         clearSQL();
-        builderSQL.append("SELECT * FROM product ORDER BY " + orderBy + " " + sort);
+        builderSQL.append("SELECT * FROM category ORDER BY " + orderBy + " " + sort);
         builderSQL.append(" LIMIT " + offset + ", " + limit + "");
         return query(builderSQL.toString(), new CategoryMapper());
     }
-
+    public int count(){
+        clearSQL();
+        builderSQL.append(
+                "SELECT COUNT(*) FROM category"
+        );
+        return count(builderSQL.toString());
+    }
     public Optional<Category> getById(Long id) {
         clearSQL();
         builderSQL.append("SELECT * FROM category WHERE id = ?");

@@ -14,16 +14,26 @@ import java.util.stream.Collectors;
 public class OrderItemService implements IOrderItemService {
     private OrderItemDao orderItemDao = new OrderItemDao();
     private TOrderItem tOrderItem = new TOrderItem();
+    private static OrderItemService instance = new OrderItemService();
+
+    public static OrderItemService getInstance() {
+        return instance;
+    }
+
     @Override
     public void bulkInsert(List<OrderItemDto> orderItemDtoList) {
-        for (OrderItemDto orderItemDto: orderItemDtoList){
+        for (OrderItemDto orderItemDto : orderItemDtoList) {
             this.insert(orderItemDto);
         }
     }
 
     @Override
-    public List<String> getProductNamesByOrderId(long orderId) {
-        return orderItemDao.getProductNamesByOrderId(orderId);
+    public String getProductNamesByOrderId(long orderId) {
+        List<String> names = orderItemDao.getProductNamesByOrderId(orderId);
+        if (names.size() == 1){
+            return names.get(0);
+        }
+        return names.get(0) + " và " + (names.size() - 1) + " sản phẩm khác";
     }
 
     @Override
@@ -51,13 +61,13 @@ public class OrderItemService implements IOrderItemService {
 
     @Override
     public void delete(Long[] ids) {
-        for (Long id: ids) orderItemDao.delete(id);
+        for (Long id : ids) orderItemDao.delete(id);
     }
 
     @Override
     public Optional<OrderItemDto> getById(Long id) {
         Optional<OrderItem> orderItem = orderItemDao.getById(id);
-        if (orderItem.isPresent()){
+        if (orderItem.isPresent()) {
             OrderItemDto orderItemDto = tOrderItem.toDto(orderItem.get());
             orderItemDto.setOrder(OrderService.getInstance()
                     .getById(orderItem.get().getOrderId()).get());
@@ -71,7 +81,7 @@ public class OrderItemService implements IOrderItemService {
 
     @Override
     public List<OrderItemDto> getPart(Integer limit, Integer offset) {
-        return orderItemDao.getPart(limit, offset) .stream()
+        return orderItemDao.getPart(limit, offset).stream()
                 .map(orderItem -> getById(orderItem.getId()))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
@@ -86,5 +96,10 @@ public class OrderItemService implements IOrderItemService {
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public int count() {
+        return orderItemDao.count();
     }
 }

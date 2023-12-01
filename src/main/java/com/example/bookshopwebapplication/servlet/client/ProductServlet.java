@@ -9,7 +9,10 @@ import com.example.bookshopwebapplication.entities.Product;
 import com.example.bookshopwebapplication.entities.ProductReview;
 import com.example.bookshopwebapplication.entities.User;
 import com.example.bookshopwebapplication.service.*;
+import com.example.bookshopwebapplication.utils.Paging;
+import com.example.bookshopwebapplication.utils.Protector;
 import com.example.bookshopwebapplication.utils.TextUtils;
+import com.example.bookshopwebapplication.utils.Validator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,8 +20,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 @WebServlet("/product")
 public class ProductServlet extends HttpServlet {
@@ -46,28 +54,20 @@ public class ProductServlet extends HttpServlet {
             // Lấy tổng số đánh giá (productReview) của sản phẩm
             int totalProductReviews = productReviewService.countByProductId(id);
 
-            // Tính tổng số trang để phân trang phần đánh giá
-            int totalPagesOfProductReviews = totalProductReviews / PRODUCT_REVIEWS_PER_PAGE;
-            if (totalProductReviews % PRODUCT_REVIEWS_PER_PAGE != 0) {
-                totalPagesOfProductReviews++;
-            }
-
             // Lấy trang đánh giá hiện tại, gặp ngoại lệ (chuỗi không phải số, nhỏ hơn 1, lớn hơn tổng số trang)
             // thì gán bằng 1
             String pageReviewParam = Optional.ofNullable(request.getParameter("pageReview")).orElse("1");
             int pageReview = Integer.parseInt(pageReviewParam);
-            if (pageReview < 1 || pageReview > totalPagesOfProductReviews) {
-                pageReview = 1;
-            }
 
+            // Tính tổng số Reviews
+            int totalPagesOfProductReviews = Paging.totalPages(totalProductReviews, PRODUCT_REVIEWS_PER_PAGE);
             // Tính mốc truy vấn (offset)
-            int offset = (pageReview - 1) * PRODUCT_REVIEWS_PER_PAGE;
+            int offset = Paging.offset(pageReview, totalPagesOfProductReviews, PRODUCT_REVIEWS_PER_PAGE);
 
             // Lấy các productReview theo productId
             List<ProductReviewDto> productReviews = productReviewService.getOrderedPartByProductId(
                     PRODUCT_REVIEWS_PER_PAGE, offset, "createdAt", "DESC", id
             );
-
             productReviews.forEach(productReview -> productReview.setContent(
                     TextUtils.toParagraph(productReview.getContent())));
 
@@ -106,7 +106,57 @@ public class ProductServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Map<String, String> values = new HashMap<>();
+        values.put("userId", request.getParameter("userId"));
+        values.put("productId", request.getParameter("productId"));
+        values.put("ratingScore", request.getParameter("ratingScore"));
+        values.put("content", request.getParameter("content"));
 
+        Map<String, List<String>> violations = new HashMap<>();
+        violations.put("ratingScoreViolations", Validator.of(values.get("ratingScore"))
+                .isNotNull()
+                .toList());
+        violations.put("contentViolations", Validator.of(values.get("content"))
+                .isNotNullAndEmpty()
+                .isAtLeastOfLength(10)
+                .toList());
+
+        int sumOfViolations = violations.values().stream().mapToInt(List::size).sum();
+        String successMessage = "Đã đánh giá thành công!";
+        String errorAddReviewMessage = "Đã có lỗi truy vấn!";
+        AtomicReference<String> anchor = new AtomicReference<>("");
+        if (sumOfViolations == 0) {
+
+            ProductReviewDto productReview = new ProductReviewDto(
+                    0L,
+                    Protector.of(() -> Integer.parseInt(values.get("ratingScore"))).get(0),
+                    values.get("content"),
+                    1,
+                    new Timestamp(System.currentTimeMillis()),
+                    null,
+                    Protector.of(() -> UserService.getInstance()
+                            .getById(Long.parseLong(values.get("userId"))).get()).get().get(),
+                    Protector.of(() -> productService.getById(
+                            Long.parseLong(values.get("productId"))).get()).get().get()
+                    );
+
+            Protector.of(() -> productReviewService.insert(productReview))
+                    .done(run -> {
+                        request.getSession().setAttribute("successMessage", successMessage);
+                        anchor.set("#review");
+                    })
+                    .fail(exception -> {
+                        request.getSession().setAttribute("values", values);
+                        request.getSession().setAttribute("errorAddReviewMessage", errorAddReviewMessage);
+                        anchor.set("#review-form");
+                    });
+        } else {
+            request.getSession().setAttribute("values", values);
+            request.getSession().setAttribute("violations", violations);
+            anchor.set("#review-form");
+        }
+
+        response.sendRedirect(request.getContextPath() + "/product?id=" + values.get("productId") + anchor);
     }
 }

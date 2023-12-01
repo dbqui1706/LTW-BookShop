@@ -12,31 +12,34 @@
 </head>
 
 <body>
-<jsp:include page="/common/header.jsp"/>
+<jsp:include page="/common/client/header.jsp"/>
 
 <section class="section-content mb-2">
     <div class="container">
         <header class="section-heading py-4 d-flex justify-content-between">
             <h3 class="section-title">Danh mục sản phẩm</h3>
-            <a class="btn btn-secondary" href="#" role="button" style="height: fit-content;">Xem tất cả</a>
+            <a class="btn btn-secondary" href="<c:url value="/?category=all"/>" role="button" style="height: fit-content;">
+                Xem tất cả
+            </a>
         </header> <!-- section-heading.// -->
         <div class="row item-grid">
             <c:forEach var="category" items="${requestScope.categories}">
                 <div class="col-lg-3 col-md-6">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <a href="${pageContext.request.contextPath}/category?id=${category.id}"
+
+                            <a href="<c:url value="/category?id=${category.id}"/>"
                                class="stretched-link">
                                 <div class="d-flex align-items-center">
                                     <c:choose>
                                         <c:when test="${empty category.imageName}">
                                             <img width="50" height="50"
-                                                 src="${pageContext.request.contextPath}/img/50px.png"
+                                                 src="<c:url value="/img/50px.png"/>"
                                                  alt="50px.png">
                                         </c:when>
                                         <c:otherwise>
                                             <img width="50" height="50"
-                                                 src="${pageContext.request.contextPath}/image/${category.imageName}"
+                                                 src="<c:url value="/image/${category.imageName}"/>"
                                                  alt="${category.imageName}">
                                         </c:otherwise>
                                     </c:choose>
@@ -56,13 +59,13 @@
     <div class="container">
         <header class="section-heading py-4 d-flex justify-content-between">
             <h3 class="section-title">Sản phẩm mới nhất</h3>
-            <a class="btn btn-secondary" href="#" role="button" style="height: fit-content;">Xem tất cả</a>
+            <a class="btn btn-secondary" href="<c:url value="/?product=all"/>" role="button" style="height: fit-content;">Xem tất cả</a>
         </header> <!-- section-heading.// -->
         <div class="row item-grid">
             <c:forEach var="product" items="${requestScope.products}">
                 <div class="col-xl-3 col-lg-4 col-md-6">
                     <div class="card p-3 mb-4">
-                        <a href="${pageContext.request.contextPath}/product?id=${product.id}"
+                        <a href="<c:url value="/product?id=${product.id}"/>"
                            class="img-wrap text-center">
                             <c:choose>
                                 <c:when test="${empty product.imageName}">
@@ -115,7 +118,7 @@
     </div> <!-- container.// -->
 </section> <!-- section-content.// -->
 
-<jsp:include page="/common/footer.jsp"/>
+<jsp:include page="/common/client/footer.jsp"/>
 </body>
 
 </html>

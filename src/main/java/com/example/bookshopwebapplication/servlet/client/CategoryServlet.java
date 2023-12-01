@@ -6,6 +6,7 @@ import com.example.bookshopwebapplication.entities.Category;
 import com.example.bookshopwebapplication.entities.Product;
 import com.example.bookshopwebapplication.service.CategoryService;
 import com.example.bookshopwebapplication.service.ProductService;
+import com.example.bookshopwebapplication.utils.Paging;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,21 +57,17 @@ public class CategoryServlet extends HttpServlet {
             } else {
                 totalProducts = productService.countByCategoryIdAndFilters(id, filtersQuery);
             }
-            int totalPages = totalProducts / PRODUCTS_PER_PAGE;
-            if (totalProducts % PRODUCTS_PER_PAGE != 0) {
-                totalPages++;
-            }
+
             // Lấy trang hiện tại, gặp ngoại lệ (chuỗi không phải số, nhỏ hơn 1, lớn hơn tổng số trang)
             // thì gán bằng 1
             String pageParam = Optional.ofNullable(req.getParameter("page")).orElse("1");
             int page = Integer.parseInt(pageParam);
-            if (page < 1 || page > totalPages) {
-                page = 1;
-            }// Tính mốc truy vấn (offset)
-            int offset = (page - 1) * PRODUCTS_PER_PAGE;
 
-            // Lấy danh sách product của category, lấy với số lượng là PRODUCTS_PER_PAGE và tính từ mốc offset
-            List<ProductDto> products;
+            // Tính tổng page
+            int totalPages = Paging.totalPages(totalProducts,PRODUCTS_PER_PAGE);
+
+            // Tính mốc truy vấn (offset)
+            int offset = Paging.offset(page, totalProducts, PRODUCTS_PER_PAGE);
 
             // Nếu không có tiêu chí lọc
             if (filters.isEmpty()) {

@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<jsp:include page="/common/header.jsp"/>
+<jsp:include page="/common/client/header.jsp"/>
 
 <section class="section-content" style="margin: 100px 0;">
     <div class="card mx-auto" style="max-width: 380px">
@@ -59,7 +59,7 @@
     <p class="text-center mt-4">Không có tài khoản? <a href="${pageContext.request.contextPath}/signup">Đăng ký</a></p>
 </section> <!-- section-content.// -->
 
-<jsp:include page="/common/footer.jsp"/>
+<jsp:include page="/common/client/footer.jsp"/>
 </body>
 
 </html>

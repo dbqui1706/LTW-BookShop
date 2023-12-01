@@ -66,7 +66,13 @@ public class OrderItemDao extends AbstractDao<OrderItem> implements IOrderItemDa
         List<OrderItem> orderItems = query(builderSQL.toString(), new OrderItemMapper());
         return orderItems.isEmpty() ? new LinkedList<>() : orderItems;
     }
-
+    public int count (){
+        clearSQL();
+        builderSQL.append(
+                "SELECT COUNT(*) FROM order_item"
+        );
+        return count(builderSQL.toString());
+    }
     @Override
     public void bulkInsert(List<OrderItem> orderItems) {
         for (OrderItem orderItem : orderItems) this.save(orderItem);

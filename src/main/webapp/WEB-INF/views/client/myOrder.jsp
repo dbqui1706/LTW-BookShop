@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<jsp:include page="/common/header.jsp"/>
+<jsp:include page="/common/client/header.jsp"/>
 
 <section class="section-pagetop bg-light">
     <div class="container">
@@ -24,7 +24,7 @@
         <div class="row">
             <c:choose>
                 <c:when test="${not empty sessionScope.currentUser}">
-                    <jsp:include page="/common/navPanel.jsp">
+                    <jsp:include page="/common/client/navPanel.jsp">
                         <jsp:param name="active" value="ORDER"/>
                     </jsp:include>
 
@@ -74,46 +74,48 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="d-flex justify-content-center">
 
-                        <c:if test="${requestScope.totalPages != 0}">
-                            <nav class="mt-4">
-                                <ul class="pagination">
-                                    <li class="page-item ${requestScope.page == 1 ? 'disabled' : ''}">
-                                        <a class="page-link"
-                                           href="${pageContext.request.contextPath}/order?page=${requestScope.page - 1}">
-                                            Trang trước
-                                        </a>
-                                    </li>
+                            <c:if test="${requestScope.totalPages != 0}">
+                                <nav class="mt-4">
+                                    <ul class="pagination">
+                                        <li class="page-item ${requestScope.page == 1 ? 'disabled' : ''}">
+                                            <a class="page-link"
+                                               href="${pageContext.request.contextPath}/order?page=${requestScope.page - 1}">
+                                                Trang trước
+                                            </a>
+                                        </li>
 
-                                    <c:forEach begin="1" end="${requestScope.totalPages}" var="i">
-                                        <c:choose>
-                                            <c:when test="${requestScope.page == i}">
-                                                <li class="page-item active">
-                                                    <a class="page-link">${i}</a>
-                                                </li>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <li class="page-item">
-                                                    <a class="page-link"
-                                                       href="${pageContext.request.contextPath}/order?page=${i}">
-                                                            ${i}
-                                                    </a>
-                                                </li>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </c:forEach>
+                                        <c:forEach begin="1" end="${requestScope.totalPages}" var="i">
+                                            <c:choose>
+                                                <c:when test="${requestScope.page == i}">
+                                                    <li class="page-item active">
+                                                        <a class="page-link">${i}</a>
+                                                    </li>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <li class="page-item">
+                                                        <a class="page-link"
+                                                           href="${pageContext.request.contextPath}/order?page=${i}">
+                                                                ${i}
+                                                        </a>
+                                                    </li>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
 
-                                    <li class="page-item ${requestScope.page == requestScope.totalPages ? 'disabled' : ''}">
-                                        <a class="page-link"
-                                           href="${pageContext.request.contextPath}/order?page=${requestScope.page + 1}">
-                                            Trang sau
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </c:if>
-
-                    </main> <!-- col.// -->
+                                        <li class="page-item ${requestScope.page == requestScope.totalPages ? 'disabled' : ''}">
+                                            <a class="page-link"
+                                               href="${pageContext.request.contextPath}/order?page=${requestScope.page + 1}">
+                                                Trang sau
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </c:if>
+                        </div>
+                    </main>
+                    <!-- col.// -->
                 </c:when>
                 <c:otherwise>
                     <p>
@@ -125,7 +127,7 @@
     </div> <!-- container.// -->
 </section> <!-- section-content.// -->
 
-<jsp:include page="/common/footer.jsp"/>
+<jsp:include page="/common/client/footer.jsp"/>
 </body>
 
 </html>

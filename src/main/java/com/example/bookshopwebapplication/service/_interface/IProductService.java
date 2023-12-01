@@ -26,4 +26,8 @@ public interface IProductService extends IService<ProductDto> {
 
     List<ProductDto> getRandomPartByCategoryId(int limit, int offset, Long id);
     public List<ProductDto> getProductsByCategoryId(Long categoryId);
+
+    int countByQuery(String queryStr);
+
+    List<ProductDto> getByQuery(String query, int limit, int offset);
 }

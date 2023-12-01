@@ -67,10 +67,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
+                <li class="dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <strong><i class="bi bi-list"></i> Danh mục sản phẩm</strong>
+                        <strong>Danh mục sản phẩm</strong>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#">Sách giáo khoa</a></li>
@@ -84,13 +84,13 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Sản phẩm mới</a>
+                    <a class="nav-link" href="<c:url value="/?product=all&new=newProduct"/>">Sản phẩm mới</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Sản phẩm bán chạy</a>
+                    <a class="nav-link" href="<c:url value="/?product=all&selling=sell"/>">Sản phẩm bán chạy</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Khuyến mãi</a>
+                    <a class="nav-link" href="<c:url value="/?product=all&promotion=promo"/>">Khuyến mãi</a>
                 </li>
             </ul>
             <c:if test="${not empty sessionScope.currentUser}">

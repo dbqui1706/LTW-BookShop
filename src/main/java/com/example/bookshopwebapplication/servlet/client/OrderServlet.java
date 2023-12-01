@@ -9,6 +9,7 @@ import com.example.bookshopwebapplication.entities.OrderItem;
 import com.example.bookshopwebapplication.entities.User;
 import com.example.bookshopwebapplication.service.OrderItemService;
 import com.example.bookshopwebapplication.service.OrderService;
+import com.example.bookshopwebapplication.utils.Paging;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,65 +32,48 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserDto user = (UserDto) request.getSession().getAttribute("currentUser");
-
+        System.out.println(request.getSession().getId());
         if (user != null) {
             int totalOrders = orderService.countByUserId(user.getId());
-
-            // Tính tổng số trang (= tổng số order / số sản phẩm trên mỗi trang)
-            int totalPages = totalOrders / ORDERS_PER_PAGE;
-            if (totalOrders % ORDERS_PER_PAGE != 0) {
-                totalPages++;
-            }
 
             // Lấy trang hiện tại, gặp ngoại lệ (chuỗi không phải số, nhỏ hơn 1, lớn hơn tổng số trang) thì gán bằng 1
             String pageParam = Optional.ofNullable(request.getParameter("page")).orElse("1");
             int page = Integer.parseInt(pageParam);
-            if (page < 1 || page > totalPages) {
-                page = 1;
-            }
+
+            // Tính tổng số trang (= tổng số total / số sản phẩm trên mỗi trang)
+            int totalPages = Paging.totalPages(totalOrders, ORDERS_PER_PAGE);
 
             // Tính mốc truy vấn (offset)
-            int offset = (page - 1) * ORDERS_PER_PAGE;
+            int offset = Paging.offset(page, totalOrders, ORDERS_PER_PAGE);
 
             // Lấy danh sách order, lấy với số lượng là ORDERS_PER_PAGE và tính từ mốc offset
             List<OrderDto> orders = orderService.getOrderedPartByUserId(
                     user.getId(), ORDERS_PER_PAGE, offset
             );
 
+            // Tạo response order để show
             List<OrderResponse> orderResponses = new ArrayList<>();
             for (OrderDto order : orders.isEmpty() ? new LinkedList<OrderDto>() : orders) {
-                List<OrderItemDto> orderItems = orderItemService.getByOrderId(order.getId());
-                double total = 0.0;
-                for (OrderItemDto orderItem : orderItems.isEmpty() ? new ArrayList<OrderItemDto>() : orderItems) {
-                    if (orderItem.getDiscount() == 0) {
-                        total += orderItem.getPrice() * orderItem.getQuantity();
-                    } else {
-                        total += (orderItem.getPrice() * (100 - orderItem.getDiscount()) / 100) * orderItem.getQuantity();
-                    }
-                }
+                // set orderItems for Order
+                order.setOrderItems(orderItemService.getByOrderId(order.getId()));
+
+                double totalPrice = orderService.totalPrice(order);
+
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy");
                 OrderResponse orderResponse = new OrderResponse(
                         order.getId(),
                         simpleDateFormat.format(order.getCreatedAt()),
-                        check(orderItemService.getProductNamesByOrderId(order.getId())),
+                        orderItemService.getProductNamesByOrderId(order.getId()),
                         order.getStatus(),
-                        total + order.getDeliveryPrice());
+                        totalPrice + order.getDeliveryPrice());
 
                 orderResponses.add(orderResponse);
             }
-
             request.setAttribute("totalPages", totalPages);
             request.setAttribute("page", page);
             request.setAttribute("orders", orderResponses);
         }
 
         request.getRequestDispatcher("/WEB-INF/views/client/myOrder.jsp").forward(request, response);
-    }
-    private String check(List<String> list) {
-        if (list.size() == 1) {
-            return list.get(0);
-        }
-
-        return list.get(0) + " và " + (list.size() - 1) + " sản phẩm khác";
     }
 }

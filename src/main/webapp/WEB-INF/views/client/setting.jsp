@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<jsp:include page="/common/header.jsp"/>
+<jsp:include page="/common/client/header.jsp"/>
 
 <section class="section-pagetop bg-light">
     <div class="container">
@@ -29,7 +29,7 @@
                     </p>
                 </c:when>
                 <c:otherwise>
-                    <jsp:include page="/common/navPanel.jsp">
+                    <jsp:include page="/common/client/navPanel.jsp">
                         <jsp:param name="active" value="SETTING"/>
                     </jsp:include>
 
@@ -50,7 +50,7 @@
                                                    class="form-control"
                                                    id="inputUsername"
                                                    name="username"
-                                                   value="${requestScope.user.username}">
+                                                   value="${sessionScope.currentUser.username}">
                                         </div>
                                         <div class="mb-3">
                                             <label for="inputFullname" class="form-label">Họ và tên</label>
@@ -58,7 +58,7 @@
                                                    class="form-control"
                                                    id="inputFullname"
                                                    name="fullname"
-                                                   value="${requestScope.user.fullname}">
+                                                   value="${sessionScope.currentUser.fullName}">
                                         </div>
                                         <div class="mb-3">
                                             <label for="inputEmail" class="form-label">Email</label>
@@ -66,7 +66,7 @@
                                                    class="form-control"
                                                    id="inputEmail"
                                                    name="email"
-                                                   value="${requestScope.user.email}">
+                                                   value="${sessionScope.currentUser.email}">
                                         </div>
                                         <div class="mb-3">
                                             <label for="inputPhoneNumber" class="form-label">Số điện thoại</label>
@@ -74,7 +74,7 @@
                                                    class="form-control"
                                                    id="inputPhoneNumber"
                                                    name="phoneNumber"
-                                                   value="${requestScope.user.phoneNumber}">
+                                                   value="${sessionScope.currentUser.phoneNumber}">
                                         </div>
                                         <div class="mb-3">
                                             <div class="form-check d-inline-block me-4">
@@ -83,7 +83,7 @@
                                                        name="gender"
                                                        id="radioGender1"
                                                        value="0"
-                                                    ${requestScope.user.gender == 0 ? 'checked' : ''}>
+                                                    ${sessionScope.currentUser.gender == 0 ? 'checked' : ''}>
                                                 <label class="form-check-label" for="radioGender1">Nam</label>
                                             </div>
                                             <div class="form-check d-inline-block">
@@ -92,7 +92,7 @@
                                                        name="gender"
                                                        id="radioGender2"
                                                        value="1"
-                                                    ${requestScope.user.gender == 1 ? 'checked' : ''}>
+                                                    ${sessionScope.currentUser.gender == 1 ? 'checked' : ''}>
                                                 <label class="form-check-label" for="radioGender2">Nữ</label>
                                             </div>
                                         </div>
@@ -102,7 +102,7 @@
                                                    class="form-control"
                                                    id="inputAddress"
                                                    name="address"
-                                                   value="${requestScope.user.address}">
+                                                   value="${sessionScope.currentUser.address}">
                                         </div>
                                         <button type="submit" class="btn btn-primary w-100">Cập nhật thông tin mới</button>
                                     </form>
@@ -116,7 +116,7 @@
     </div> <!-- container.// -->
 </section> <!-- section-content.// -->
 
-<jsp:include page="/common/footer.jsp"/>
+<jsp:include page="/common/client/footer.jsp"/>
 </body>
 
 </html>

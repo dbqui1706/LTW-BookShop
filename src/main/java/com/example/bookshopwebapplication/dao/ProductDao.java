@@ -67,7 +67,13 @@ public class ProductDao extends AbstractDao<Product> implements IProductDao {
         builderSQL.append(" LIMIT " + offset + ", " + limit + "");
         return super.getOrderedPart(builderSQL.toString(), new ProductMapper());
     }
-
+    public int count(){
+        clearSQL();
+        builderSQL.append(
+                "SELECT COUNT(*) FROM product"
+        );
+        return count(builderSQL.toString());
+    }
     public int countByCategoryId(Long id) {
         clearSQL();
         builderSQL.append("SELECT COUNT(productId) FROM product_category WHERE categoryId = ?");
@@ -173,5 +179,28 @@ public class ProductDao extends AbstractDao<Product> implements IProductDao {
         builderSQL.append("ON pc.productId = p.id WHERE pc.categoryId = ? ");
         List<Product> products = query(builderSQL.toString(), new ProductMapper(), categoryId);
         return products.isEmpty() ? new LinkedList<Product>() : products;
+    }
+
+    @Override
+    public int countByQuery(String query) {
+        clearSQL();
+        builderSQL.append(
+                "SELECT COUNT(id) " +
+                        "FROM product " +
+                        "WHERE name LIKE CONCAT('%', ?, '%')"
+        );
+        return count(builderSQL.toString(), query);
+    }
+
+    @Override
+    public List<Product> getByQuery(String query, int limit, int offset) {
+        clearSQL();
+        builderSQL.append(
+                "SELECT * FROM product " +
+                        "WHERE name LIKE CONCAT('%', ?, '%') " +
+                        "LIMIT " + limit + " OFFSET " + offset
+        );
+        List<Product> products = query(builderSQL.toString(), new ProductMapper(), query);
+        return products.isEmpty() ? new LinkedList<>() : products;
     }
 }

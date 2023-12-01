@@ -4,6 +4,7 @@ import com.example.bookshopwebapplication.dto.UserDto;
 import com.example.bookshopwebapplication.entities.User;
 import com.example.bookshopwebapplication.service.UserService;
 import com.example.bookshopwebapplication.utils.EncodePassword;
+import com.example.bookshopwebapplication.utils.Protector;
 import com.example.bookshopwebapplication.utils.Validator;
 
 import javax.servlet.ServletException;
@@ -33,12 +34,13 @@ public class SignIn extends HttpServlet {
         values.put("username", request.getParameter("username"));
         values.put("password", request.getParameter("password"));
 
-        Optional<UserDto> userFromServer = UserService.getInstance().getByUsername(values.get("username"));
+        Optional<UserDto> userFromServer = Protector.of(() -> UserService.getInstance()
+                .getByUsername(values.get("username"))).get(Optional::empty);
         violations.put("usernameViolations", Validator.of(values.get("username"))
                 .isNotNullAndEmpty()
                 .isNotBlankAtBothEnds()
                 .isAtMostOfLength(25)
-                .isExistent(userFromServer == null ? false : true, "Tên đăng nhập")
+                .isExistent(userFromServer.isPresent(), "Tên đăng nhập")
                 .toList());
         violations.put("passwordViolations", Validator.of(values.get("password"))
                 .isNotNullAndEmpty()
@@ -50,7 +52,7 @@ public class SignIn extends HttpServlet {
 
         sumOfViolations = violations.values().stream().mapToInt(List::size).sum();
 
-        if (sumOfViolations == 0 && userFromServer != null) {
+        if (sumOfViolations == 0 && userFromServer.isPresent()) {
             request.getSession().setAttribute("currentUser", userFromServer.get());
             response.sendRedirect(request.getContextPath() + "/");
         } else {

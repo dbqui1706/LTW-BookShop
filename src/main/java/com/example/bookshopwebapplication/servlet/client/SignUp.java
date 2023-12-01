@@ -19,6 +19,7 @@ import java.util.Optional;
 
 @WebServlet("/signup")
 public class SignUp extends HttpServlet {
+    private final UserService userService = new UserService();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/views/client/signup.jsp").forward(request,response);
@@ -40,12 +41,13 @@ public class SignUp extends HttpServlet {
         values.put("policy", request.getParameter("policy"));
 
         // Kiểm tra các parameter, lưu các vi phạm (nếu có) vào map violations
-        Optional<UserDto> userFromServer = UserService.getInstance().getByUsername(values.get("username"));
+        Optional<UserDto> userFromServer = userService.getByUsername(values.get("username"));
         violations.put("usernameViolations", Validator.of(values.get("username"))
                 .isNotNullAndEmpty()
                 .isNotBlankAtBothEnds()
                 .isAtMostOfLength(25)
-                .isNotExistent(userFromServer == null ? false : true, "Tên đăng nhập")
+                .isNotExistent(userService.getAllUsername().contains(values.get("username"))
+                        ? false : true, "Tên đăng nhập")
                 .toList());
         violations.put("passwordViolations", Validator.of(values.get("password"))
                 .isNotNullAndEmpty()
@@ -95,7 +97,7 @@ public class SignUp extends HttpServlet {
                     values.get("address"),
                     "CUSTOMER"
             );
-            Optional<UserDto> userSignUp = UserService.getInstance().insert(user);
+            Optional<UserDto> userSignUp = userService.insert(user);
             if (userSignUp.isPresent()) {
                 request.setAttribute("successMessage", successMessage);
             } else {

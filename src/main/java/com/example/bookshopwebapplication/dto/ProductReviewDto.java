@@ -34,4 +34,22 @@ public class ProductReviewDto {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
+
+    public ProductReviewDto(Long id,
+                            Integer ratingScore,
+                            String content,
+                            Integer isShow,
+                            Timestamp createdAt,
+                            Timestamp updatedAt,
+                            UserDto user,
+                            ProductDto product) {
+        this.id = id;
+        this.ratingScore = ratingScore;
+        this.content = content;
+        this.isShow = isShow;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.user = user;
+        this.product = product;
+    }
 }

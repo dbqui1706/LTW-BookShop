@@ -8,7 +8,7 @@ import java.util.List;
 public interface IOrderItemService extends IService<OrderItemDto> {
     public void bulkInsert(List<OrderItemDto> orderItemDtoList);
 
-    public List<String> getProductNamesByOrderId(long orderId);
+    public String getProductNamesByOrderId(long orderId);
 
     public List<OrderItemDto> getByOrderId(long orderId);
 }

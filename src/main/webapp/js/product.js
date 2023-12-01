@@ -45,7 +45,7 @@ async function _fetchPutAddWishlistItem() {
   };
 
   const response = await fetch(contextPathMetaTag.content + "/wishlist", {
-    method: "PUT",
+    method: "POST",
     headers: {
       "Accept": "application/json",
       "Content-Type": "application/json",

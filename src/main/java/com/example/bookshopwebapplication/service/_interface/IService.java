@@ -14,4 +14,5 @@ public interface IService<T> {
     Optional<T> getById(Long id);
     List<T> getPart(Integer limit, Integer offset);
     List<T> getOrderedPart(Integer limit, Integer offset, String orderBy, String sort);
+    int count();
 }
