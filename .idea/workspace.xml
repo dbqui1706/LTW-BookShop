@@ -9,99 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ccfba4a-e298-4cb6-8d7e-4e66e57244e3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/filter/AuthorizationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/Admin401.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/Home.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/SignIn.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/SignOut.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/category/CategoryDetail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/category/CategoryManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/category/CreateCategory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/category/UpdateCategory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/user/CreateUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/user/UpdateUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/user/UserDetail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/user/UserManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/OrderDetailServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/SearchServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/utils/ImageUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/utils/Paging.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/401.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/category/categoryManager.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/category/create.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/category/detail.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/category/update.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/home.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/signin.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/user/create.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/user/detail.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/user/update.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/user/userManager.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/allCategory.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/allProduct.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/orderDetail.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/searchView.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/common/admin/footer.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/common/admin/header.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/wishlist.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/client.http" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/client.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/CategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/CategoryDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/OrderItemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/OrderItemDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/ProductDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/UserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/WishlistItemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/WishlistItemDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/_interface/IProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/_interface/IProductDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/_interface/IUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/_interface/IUserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/_interface/IWishlistItemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/_interface/IWishlistItemDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dto/ProductReviewDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dto/ProductReviewDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/filter/EncodingFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/filter/EncodingFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/filter/ExceptionFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/filter/ExceptionFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/CartItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/CartItemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/CartService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/CategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/OrderItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/OrderItemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/ProductReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/ProductReviewService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/WishlistItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/WishlistItemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/_interface/IOrderItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/_interface/IOrderItemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/_interface/IOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/_interface/IOrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/_interface/IProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/_interface/IProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/_interface/IService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/_interface/IService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/_interface/IUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/_interface/IUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/_interface/IWishlistItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/_interface/IWishlistItemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/CategoryServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/CategoryServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/OrderServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/OrderServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/ProductServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/ProductServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/SignIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/SignIn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/SignOut.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/SignOut.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/SignUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/SignUp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/WishlistServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/WishlistServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/utils/Validator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/utils/Validator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/cart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/cart.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/categoryView.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/categoryView.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/changePassword.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/changePassword.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/myOrder.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/myOrder.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/productView.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/productView.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/setting.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/setting.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/signin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/signin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/signup.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/signup.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/user.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/user.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/wishlist.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/wishlist.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/common/footer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/common/client/footer.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/common/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/common/client/header.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/common/navPanel.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/common/client/navPanel.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/product.js" afterDir="false" />
-    </list>
+    <list default="true" id="7ccfba4a-e298-4cb6-8d7e-4e66e57244e3" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -322,7 +230,7 @@
       <workItem from="1700706260684" duration="29649000" />
       <workItem from="1700886594804" duration="53361000" />
       <workItem from="1701147239886" duration="2667000" />
-      <workItem from="1701356991491" duration="23150000" />
+      <workItem from="1701356991491" duration="24075000" />
     </task>
     <servers />
   </component>
