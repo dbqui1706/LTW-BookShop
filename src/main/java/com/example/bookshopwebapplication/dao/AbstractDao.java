@@ -135,7 +135,7 @@ public abstract class AbstractDao<T> implements IGenericDao<T> {
     //hực hiện một truy vấn SQL SELECT để lấy một đối tượng theo ID.trả về một Optional chứa đối tượng nếu tìm thấy, hoặc null nếu không tìm thấy
     public Optional<T> getById(String sql, IRowMapper<T> mapper, Object... parameters) {
         List<T> list = query(sql, mapper, parameters);
-        return list.isEmpty() ? Optional.empty() : (Optional<T>) list.get(0);
+        return list.isEmpty() ? null : (Optional<T>) list.get(0);
     }
 
     @Override
@@ -151,7 +151,6 @@ public abstract class AbstractDao<T> implements IGenericDao<T> {
     }
 
     @Override
-
     //int limit, int offset, String orderBy, String orderDir
     public List<T> getOrderedPart(String sql, IRowMapper<T> mapper, Object... parameters) {
         return query(sql, mapper, parameters);

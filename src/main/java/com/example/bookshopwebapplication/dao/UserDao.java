@@ -1,9 +1,10 @@
 package com.example.bookshopwebapplication.dao;
 
 import com.example.bookshopwebapplication.dao._interface.IUserDao;
+import com.example.bookshopwebapplication.dao.mapper.ProductMapper;
 import com.example.bookshopwebapplication.dao.mapper.UserMapper;
+import com.example.bookshopwebapplication.entities.Product;
 import com.example.bookshopwebapplication.entities.User;
-
 import java.util.List;
 import java.util.Optional;
 

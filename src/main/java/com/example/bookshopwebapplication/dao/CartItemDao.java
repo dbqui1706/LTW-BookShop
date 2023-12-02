@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class CartItemDao extends AbstractDao<CartItem> implements ICartItemDao {
-
     //Lưu một CartItem mới vào cơ sở dữ liệu.
     public Long save(CartItem cartItem) {
         clearSQL();

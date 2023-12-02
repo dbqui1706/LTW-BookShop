@@ -85,10 +85,9 @@ public class CategoryService implements ICategoryService {
     @Override
     public Optional<CategoryDto> getByProductId(long id) {
         Optional<Category> category = categoryDao.getByProductId(id);
-        if (category.isPresent()) {
-            // Chuyển đổi từ Category sang CategoryDto
-            return Optional.of(tCategory.toDto(category.get()));
-        }
+        // Chuyển đổi từ Category sang CategoryDto
+        if (category.isPresent()) return Optional.of(tCategory.toDto(category.get()));
         return Optional.empty();
+
     }
 }

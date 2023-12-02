@@ -2,6 +2,7 @@ package com.example.bookshopwebapplication.dao;
 
 import com.example.bookshopwebapplication.dao._interface.ICategoryDao;
 import com.example.bookshopwebapplication.dao.mapper.CategoryMapper;
+import com.example.bookshopwebapplication.dao.mapper.ProductMapper;
 import com.example.bookshopwebapplication.entities.Category;
 import com.example.bookshopwebapplication.entities.Product;
 
@@ -10,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class CategoryDao extends AbstractDao<Category> implements ICategoryDao {
-
     // Lưu một Category mới vào cơ sở dữ liệu.
     public Long save(Category category) {
         clearSQL();

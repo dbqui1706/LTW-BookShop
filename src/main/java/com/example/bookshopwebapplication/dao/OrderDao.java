@@ -10,9 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class OrderDao extends AbstractDao<Order> implements IOrderDao {
-
     // Lưu một đơn hàng mới vào cơ sở dữ liệu.
-    public Long save(Order order) {
+    public Long save(Order order){
         clearSQL();
         builderSQL.append(
                 "INSERT INTO " +
@@ -141,7 +140,7 @@ public class OrderDao extends AbstractDao<Order> implements IOrderDao {
     public void reset(long id) {
         clearSQL();
         builderSQL.append(
-                "UPDATE orders SET status = 1, updatedAt = NOW() WHERE id = ?"
+                "UPDATE orders SET status = 1, updatedAt = NOW() WHERE id = :id"
         );
         update(builderSQL.toString(), id);
     }
