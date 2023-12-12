@@ -1,8 +1,11 @@
 package com.example.bookshopwebapplication.utils;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -36,5 +39,18 @@ public class ImageUtils {
             e.printStackTrace();
         }
         return imageName;
+    }
+    public static void delete(@NotNull String imageName) {
+        Path imagePath = Paths.get(IMAGES_DIR).resolve(imageName).normalize();
+        try {
+            boolean result = Files.deleteIfExists(imagePath);
+            if (result) {
+                System.out.println("File is deleted: " + imageName);
+            } else {
+                System.out.println("Sorry, unable to delete the file: " + imageName);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -17,6 +17,46 @@ public class CategoryDto {
     private String imageName;
     private List<ProductDto> products;
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public List<ProductDto> getProducts() {
+        return products;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public void setProducts(List<ProductDto> products) {
+        this.products = products;
+    }
+
     public CategoryDto(Long id,
                        String name,
                        String description,

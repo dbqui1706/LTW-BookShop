@@ -101,4 +101,11 @@ public class ProductReviewService implements IProductReviewService {
     public int sumRatingScoresByProductId(long id) {
         return productReviewDao.sumRatingScoresByProductId(id);
     }
+
+    public void hide(long id) {
+        productReviewDao.hide(id);
+    }
+    public void show(long id) {
+        productReviewDao.show(id);
+    }
 }

@@ -15,7 +15,7 @@
     <div class="card mx-auto" style="max-width: 380px">
         <div class="card-body">
             <h4 class="card-title mb-4">Đăng nhập</h4>
-            <form action="${pageContext.request.contextPath}" method="post">
+            <form action="${pageContext.request.contextPath}/signin" method="post">
                 <div class="mb-3">
                     <input name="username"
                            class="form-control ${not empty requestScope.violations.usernameViolations
