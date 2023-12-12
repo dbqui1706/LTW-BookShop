@@ -10,10 +10,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a66af44e-9a46-4e88-85fc-007cb2e7a96c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/category/DeleteCategory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/order/OrderManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/order/OrderManagerDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/order/UpdateOrder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/product/CreateProduct.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/product/DeleteProduct.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/product/ProductDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/product/ProductManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/product/UpdateProduct.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/productreview/ProductReviewDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/productreview/ProductReviewManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/productreview/UpdateProductReview.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/order/detail.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/order/orderManager.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/product/create.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/product/detail.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/product/productManager.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/product/update.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/productReview/detail.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/productReview/productReviewManager.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/productReview/update.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/6f6ee481-a535-437a-a473-4363f0ebf021.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/6f6ee481-a535-437a-a473-4363f0ebf021.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
@@ -89,7 +109,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Tomcat Server.webShop.executor": "Run",
+    "Tomcat Server.webShop.executor": "Debug",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/ADMIN/Documents/tmp/BookShopWeb-main",
@@ -257,7 +277,7 @@
       <workItem from="1702023575754" duration="35880000" />
       <workItem from="1702279176922" duration="7377000" />
       <workItem from="1702314017843" duration="5207000" />
-      <workItem from="1702355851296" duration="8783000" />
+      <workItem from="1702355851296" duration="9095000" />
     </task>
     <servers />
   </component>
