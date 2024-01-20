@@ -35,7 +35,7 @@ public class UpdateOrder extends HttpServlet {
         if ("CONFIRM".equals(action)) {
             String successMessage = String.format("Đã xác nhận đã giao đơn hàng #%s thành công!", id);
             Protector.of(() -> {
-                orderService.confirm(id);
+                        orderService.confirm(id);
                     })
                     .done(r -> request.getSession().setAttribute("successMessage", successMessage))
                     .fail(e -> request.getSession().setAttribute("errorMessage", errorMessage));
