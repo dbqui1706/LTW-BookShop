@@ -1,6 +1,8 @@
 package com.example.bookshopwebapplication.utils;
 
 
+import lombok.SneakyThrows;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
@@ -41,17 +43,14 @@ public class ImageUtils {
         return imageName;
     }
 
+    @SneakyThrows
     public static void delete(String imageName) {
         Path imagePath = Paths.get(IMAGES_DIR).resolve(imageName).normalize();
-        try {
-            boolean result = Files.deleteIfExists(imagePath);
-            if (result) {
-                System.out.println("File is deleted: " + imageName);
-            } else {
-                System.out.println("Sorry, unable to delete the file: " + imageName);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        boolean result = Files.deleteIfExists(imagePath);
+        if (result) {
+            System.out.println("File is deleted: " + imageName);
+        } else {
+            System.out.println("Sorry, unable to delete the file: " + imageName);
         }
     }
 }

@@ -10,7 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a66af44e-9a46-4e88-85fc-007cb2e7a96c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/order/UpdateOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/order/UpdateOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/category/DeleteCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/category/DeleteCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/utils/ImageUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/utils/ImageUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -262,7 +264,7 @@
       <workItem from="1704511528903" duration="13000" />
       <workItem from="1704715926004" duration="650000" />
       <workItem from="1705544313688" duration="4586000" />
-      <workItem from="1705724095256" duration="5406000" />
+      <workItem from="1705724095256" duration="6589000" />
     </task>
     <servers />
   </component>
@@ -354,24 +356,6 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="96" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/utils/ImageUtils.java</url>
-          <line>18</line>
-          <properties class="com.example.bookshopwebapplication.utils.ImageUtils" method="upload">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="98" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/category/UpdateCategory.java</url>
-          <line>43</line>
-          <properties class="com.example.bookshopwebapplication.servlet.admin.category.UpdateCategory" method="doPost">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="99" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

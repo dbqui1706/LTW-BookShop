@@ -30,7 +30,6 @@ public class DeleteCategory extends HttpServlet {
                 .done(r -> request.getSession().setAttribute("successMessage", successMessage))
                 .fail(e -> request.getSession().setAttribute("errorMessage", errorMessage));
         response.sendRedirect(request.getContextPath() + "/admin/categoryManager");
-//        request.getRequestDispatcher("/WEB-INF/views/admin/user/categoryManager.jsp").forward(request, response);
     }
 
     @Override
