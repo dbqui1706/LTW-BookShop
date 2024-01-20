@@ -54,7 +54,7 @@ public class SignIn extends HttpServlet {
                 request.getSession().setAttribute("currentUser", user);
                 response.sendRedirect(request.getContextPath() + "/admin");
             } else {
-                String errorMessage = "Người dùng không có quyền đăng nhập Admin!";
+                String errorMessage = "Người dùng không có quyền đăng nhập!";
                 request.setAttribute("errorMessage", errorMessage);
                 request.getRequestDispatcher("/WEB-INF/views/admin/signin.jsp").forward(request, response);
             }

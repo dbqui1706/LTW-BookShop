@@ -32,4 +32,20 @@ public class OrderItemDto {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
+    public OrderItemDto(Double price,
+                        Double discount,
+                        Integer quantity,
+                        Timestamp createdAt,
+                        Timestamp updatedAt,
+                        OrderDto orderDto,
+                        ProductDto productDto) {
+        this.id = id;
+        this.price = price;
+        this.discount = discount;
+        this.quantity = quantity;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.order = orderDto;
+        this.product = productDto;
+    }
 }

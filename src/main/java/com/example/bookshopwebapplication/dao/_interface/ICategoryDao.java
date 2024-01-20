@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ICategoryDao extends IGenericDao<Category>{
-    List<Category> findAll();
+    List<Category> getAll();
 
     Optional<Category> getByProductId(long id);
 }

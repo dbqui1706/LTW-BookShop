@@ -26,8 +26,6 @@ public class ProductMapper implements IRowMapper<Product> {
             product.setShop(resultSet.getInt("shop"));
             product.setCreatedAt(resultSet.getTimestamp("createdAt"));
             product.setUpdatedAt(resultSet.getTimestamp("updatedAt"));
-            product.setStartsAt(resultSet.getTimestamp("startsAt"));
-            product.setEndsAt(resultSet.getTimestamp("endsAt"));
             return product;
         } catch (SQLException e) {
             throw new RuntimeException(e);

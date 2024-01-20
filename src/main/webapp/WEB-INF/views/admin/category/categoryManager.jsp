@@ -82,7 +82,7 @@
                                 Sửa
                             </a>
                             <a class="btn btn-danger"
-                               href="<c:url value="/admin/categoryManager?action=delete&id=${category.id}"/>"
+                               href="<c:url value="/admin/categoryManager/delete?id=${category.id}"/>"
                                role="button"
                                onclick="return confirm('Bạn có muốn xóa?')">
                                 Xóa

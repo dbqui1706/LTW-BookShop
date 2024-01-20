@@ -1,4 +1,4 @@
-package com.example.bookshopwebapplication.servlet.admin.productreview;
+package com.example.bookshopwebapplication.servlet.admin.review;
 
 import com.example.bookshopwebapplication.dto.ProductReviewDto;
 import com.example.bookshopwebapplication.service.ProductReviewService;
@@ -35,7 +35,7 @@ public class ProductReviewDetail extends HttpServlet {
             Protector.of(() -> productService.getById(productReview.getProduct().getId())).get(Optional::empty)
                     .ifPresent(productReview::setProduct);
             request.setAttribute("productReview", productReview);
-            request.getRequestDispatcher("/WEB-INF/views/admin/productReview/detail.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/admin/review/detail.jsp").forward(request, response);
         } else {
             response.sendRedirect(request.getContextPath() + "/admin/reviewManager");
         }

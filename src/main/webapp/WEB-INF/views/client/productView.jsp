@@ -120,6 +120,7 @@
                             title="Thêm vào danh sách yêu thích" ${requestScope.isWishlistItem == 1 ? 'disabled' : ''}>
                         <i class="bi bi-heart"></i>
                     </button>
+<%--                    <a href="<c:url value="/checkout?productId=${param.id}"/>" class="btn btn-primary ms-2">Mua ngay</a>--%>
                     <button type="button" class="btn btn-primary ms-2" id="buy-now">Mua ngay</button>
                     <button type="button" class="btn btn-light ms-2" id="add-cart-item">Thêm vào giỏ hàng</button>
                 </div>
@@ -175,14 +176,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <c:choose>
-                                        <c:when test="${productReview.isShow == 1}">
-                                            ${productReview.content}
-                                        </c:when>
-                                        <c:otherwise>
-                                            <em>Nội dung đánh giá đã được ẩn bởi quản trị viên</em>
-                                        </c:otherwise>
-                                    </c:choose>
+                                        ${productReview.content}
                                 </div>
                             </div>
                         </c:forEach>

@@ -1,17 +1,14 @@
 package com.example.bookshopwebapplication.service;
 
-import com.example.bookshopwebapplication.dao.CategoryDao;
 import com.example.bookshopwebapplication.dao.ProductDao;
-import com.example.bookshopwebapplication.dao._interface.ICategoryDao;
-import com.example.bookshopwebapplication.dao._interface.IProductDao;
 import com.example.bookshopwebapplication.dto.ProductDto;
 import com.example.bookshopwebapplication.entities.Product;
 import com.example.bookshopwebapplication.service._interface.IProductService;
 import com.example.bookshopwebapplication.service.transferObject.TProduct;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
+
 
 public class ProductService implements IProductService {
 
@@ -102,6 +99,14 @@ public class ProductService implements IProductService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<ProductDto> getOrderedPartByFilters(int limit, int offset, String orderBy, String sort, String filters) {
+        return productDao.getOrderedPartByFilters(limit, offset, orderBy, sort, filters)
+                .stream()
+                .map(p -> tProduct.toDto(p))
+                .collect(Collectors.toList());
+    }
+
     // Phương thức để lấy danh sách các nhà xuất bản dựa trên categoryId
     @Override
     public List<String> getPublishersByCategoryId(Long categoryId) {
@@ -124,6 +129,11 @@ public class ProductService implements IProductService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<String> getPublishers() {
+        return productDao.getPublishers();
+    }
+
     // Phương thức để lấy phần đầu tiên của một chuỗi hai phần, ví dụ: "ABC - XYZ" -> "ABC"
     @Override
     public int countByQuery(String query) {
@@ -137,6 +147,21 @@ public class ProductService implements IProductService {
                 .map(product -> getById(product.getId()))
                 .filter(Optional::isPresent)
                 .map(Optional::get).collect(Collectors.toList());
+    }
+
+    @Override
+    public void insertProductCategory(long productId, long categoryId) {
+        productDao.insertProductCategory(productId, categoryId);
+    }
+
+    @Override
+    public void updateProductCategory(long productId, long categoryId) {
+        productDao.updateProductCategory(productId, categoryId);
+    }
+
+    @Override
+    public void deleteProductCategory(long productId, long categoryId) {
+        productDao.deleteProductCategory(productId, categoryId);
     }
 
     @Override
@@ -178,6 +203,24 @@ public class ProductService implements IProductService {
                 priceRange -> "p.price BETWEEN " + getMinPrice(priceRange) + " AND " + getMaxPrice(priceRange)
         ).collect(Collectors.joining(" OR "));
         return "(" + priceRangeConditions + ")";
+    }
+
+    @Override
+    public String filterByCategoryName(List<String> categoriesName) {
+        String categoryNames = categoriesName
+                .stream()
+                .map(c -> "'" + c + "'")
+                .collect(Collectors.joining(", "));
+        return "p.id IN (" + productDao.getIDByCategoriesName("(" + categoryNames + ")") + ")";
+    }
+
+    @Override
+    public List<ProductDto> getProductByFilter(String filters) {
+        productDao.getProductByFilter(filters);
+        return productDao.getProductByFilter(filters)
+                .stream()
+                .map(p -> tProduct.toDto(p))
+                .collect(Collectors.toList());
     }
 
     // Phương thức để tạo chuỗi truy vấn từ danh sách điều kiện lọc

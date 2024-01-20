@@ -70,7 +70,6 @@ public abstract class AbstractDao<T> implements IGenericDao<T> {
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
-            throw new RuntimeException(e);
         } finally {
             if (resultSet != null) try {
                 resultSet.close();
@@ -98,7 +97,6 @@ public abstract class AbstractDao<T> implements IGenericDao<T> {
             statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             setParameters(parameters);
             statement.executeUpdate();
-
             resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
                 id = resultSet.getLong(1);
@@ -130,7 +128,39 @@ public abstract class AbstractDao<T> implements IGenericDao<T> {
             }
         }
     }
+    public void insertNoGenerateKey(String sql, Object... parameters){
+        try {
+            connection = getConnection();
+            connection.setAutoCommit(false);
 
+            statement = connection.prepareStatement(sql);
+            setParameters(parameters);
+            statement.executeUpdate();
+            connection.commit();
+        } catch (SQLException e) {
+            try {
+                if (!Objects.isNull(connection)) {
+                    connection.rollback();
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException();
+            }
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
     @Override
     //hực hiện một truy vấn SQL SELECT để lấy một đối tượng theo ID.trả về một Optional chứa đối tượng nếu tìm thấy, hoặc null nếu không tìm thấy
     public Optional<T> getById(String sql, IRowMapper<T> mapper, Object... parameters) {
@@ -232,6 +262,8 @@ public abstract class AbstractDao<T> implements IGenericDao<T> {
                     statement.setTimestamp(index, (Timestamp) parameter);
                 } else if (parameter instanceof Double) {
                     statement.setDouble(index, (Double) parameter);
+                } else if (Objects.isNull(parameter)) {
+                    statement.setNull(index, Types.NULL);
                 }
             }
         } catch (SQLException e) {

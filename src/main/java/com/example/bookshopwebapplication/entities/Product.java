@@ -27,8 +27,6 @@ public class Product {
     private Integer shop;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    private Timestamp startsAt;
-    private Timestamp endsAt;
 
     public Product(Long id,
                    String name,
@@ -44,9 +42,7 @@ public class Product {
                    String imageName,
                    Integer shop,
                    Timestamp createdAt,
-                   Timestamp updatedAt,
-                   Timestamp startsAt,
-                   Timestamp endsAt) {
+                   Timestamp updatedAt) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -62,7 +58,5 @@ public class Product {
         this.shop = shop;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.startsAt = startsAt;
-        this.endsAt = endsAt;
     }
 }

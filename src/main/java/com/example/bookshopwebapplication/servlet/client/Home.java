@@ -64,6 +64,7 @@ public class Home extends HttpServlet {
 
             if (newProducts.isPresent() && newProducts.get().equals("newProduct")) {
                 products = productService.getOrderedPart(PRODUCT_PER_PAGE, offset, "createdAt", "DESC");
+
             } else if (sellingProduct.isPresent() && sellingProduct.get().equals("sell")) {
                 products = productService.getOrderedPart(PRODUCT_PER_PAGE, offset, "totalBuy", "DESC");
             } else if (promotion.isPresent() && promotion.get().equals("promo")) {

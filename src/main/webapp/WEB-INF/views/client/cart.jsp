@@ -10,8 +10,8 @@
     <title>Giỏ hàng</title>
 
     <!-- Custom Scripts -->
-    <script src="${pageContext.request.contextPath}/js/toast.js" type="module"></script>
-    <script src="${pageContext.request.contextPath}/js/cart.js" type="module"></script>
+    <script src="<c:url value="/js/toast.js"/>" type="module"></script>
+    <script src="<c:url value="/js/cart.js"/>" type="module"></script>
 </head>
 
 <body>

@@ -38,7 +38,7 @@ public class CategoryDao extends AbstractDao<Category> implements ICategoryDao {
 
     // Lấy danh sách tất cả các Category từ cơ sở dữ liệu.
     @Override
-    public List<Category> findAll() {
+    public List<Category> getAll() {
         clearSQL();
         builderSQL.append("SELECT * FROM category");
         return super.query(builderSQL.toString(), new CategoryMapper());

@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.text.SimpleDateFormat;
+
 public class ProductReviewDao extends AbstractDao<ProductReview> implements IProductReviewDao {
 
     // Phương thức để lưu đánh giá sản phẩm mới vào cơ sở dữ liệu
@@ -47,7 +48,7 @@ public class ProductReviewDao extends AbstractDao<ProductReview> implements IPro
         clearSQL();
         builderSQL.append("SELECT * FROM product_review WHERE id = ?");
         List<ProductReview> list = query(builderSQL.toString(), new ProductReviewMapper(), id);
-        return list.isEmpty() ? null: Optional.ofNullable(list.get(0));
+        return list.isEmpty() ? null : Optional.ofNullable(list.get(0));
     }
 
     // Phương thức để lấy một phần danh sách đánh giá sản phẩm từ cơ sở dữ liệu
@@ -82,7 +83,7 @@ public class ProductReviewDao extends AbstractDao<ProductReview> implements IPro
                 "SELECT pr.*, u.fullname " +
                         "FROM product_review pr " +
                         "JOIN user u ON pr.userId = u.id " +
-                        "WHERE productId = ? " +
+                        "WHERE productId = ? AND pr.isShow = 1 " +
                         "ORDER BY " + orderBy + " " + sort +
                         " LIMIT " + offset + ", " + limit
         );
@@ -115,9 +116,9 @@ public class ProductReviewDao extends AbstractDao<ProductReview> implements IPro
     public void hide(long id) {
         clearSQL();
         builderSQL.append(
-                "UPDATE product_review SET isShow = 0, " +
-                        "updatedAt = " + new Timestamp(System.currentTimeMillis()) + " "
-                        + "WHERE id = ?"
+                "UPDATE product_review SET isShow = 0," +
+                        " updatedAt = NOW()" +
+                        " WHERE id = ?"
         );
         update(builderSQL.toString(), id);
     }
@@ -127,9 +128,9 @@ public class ProductReviewDao extends AbstractDao<ProductReview> implements IPro
     public void show(long id) {
         clearSQL();
         builderSQL.append(
-                "UPDATE product_review SET isShow = 1, " +
-                        "updatedAt = " + new Timestamp(System.currentTimeMillis()) + " "
-                        + "WHERE id = ?"
+                "UPDATE product_review SET isShow = 1," +
+                        " updatedAt = NOW() " +
+                        " WHERE id = ?"
         );
         update(builderSQL.toString(), id);
     }

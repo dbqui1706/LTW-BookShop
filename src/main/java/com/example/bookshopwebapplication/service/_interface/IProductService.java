@@ -16,18 +16,29 @@ public interface IProductService extends IService<ProductDto> {
 
     public String filterByPriceRanges(List<String> priceRanges);
 
+    String filterByCategoryName(List<String> categoriesName);
+
+    List<ProductDto> getProductByFilter(String filters);
+
     public String createFiltersQuery(List<String> filters);
 
     List<ProductDto> getOrderedPartByCategoryId(int productsPerPage, int offset, String orderBy, String sort, Long id);
 
     List<ProductDto> getOrderedPartByCategoryIdAndFilters(int productsPerPage, int offset, String orderBy, String sort, Long id, String filtersQuery);
 
+    List<ProductDto> getOrderedPartByFilters(int limit, int offset, String orderBy, String sort, String filters);
+
     List<String> getPublishersByCategoryId(Long id);
 
     List<ProductDto> getRandomPartByCategoryId(int limit, int offset, Long id);
-    public List<ProductDto> getProductsByCategoryId(Long categoryId);
-
+    List<ProductDto> getProductsByCategoryId(Long categoryId);
+    List<String> getPublishers();
     int countByQuery(String queryStr);
 
     List<ProductDto> getByQuery(String query, int limit, int offset);
+    void insertProductCategory(long productId, long categoryId);
+
+    void updateProductCategory(long productId, long categoryId);
+
+    void deleteProductCategory(long productId, long categoryId);
 }

@@ -32,7 +32,6 @@ public class DeleteProduct extends HttpServlet {
             Optional<CategoryDto> categoryFromServer = Protector.of(() -> categoryService.getByProductId(id)).get(Optional::empty);
 
             Protector.of(() -> {
-//                        categoryFromServer.ifPresent(category -> productService.deleteProductCategory(id, category.getId()));
                         productService.delete(new Long[]{id});
                         Optional.ofNullable(productFromServer.get().getImageName()).ifPresent(ImageUtils::delete);
                     })

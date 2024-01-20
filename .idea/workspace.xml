@@ -10,7 +10,76 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a66af44e-9a46-4e88-85fc-007cb2e7a96c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/database/bookshopweb.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/network/OrderProductRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/ActiveAccount.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/AllProduct.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/Checkout.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/utils/mail/EmailConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/utils/mail/EmailUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/utils/mail/VerificationToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/emailConfig.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/allProductFilter.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/productBuyNow.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/verifyEmail.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/checkout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6f6ee481-a535-437a-a473-4363f0ebf021.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/6f6ee481-a535-437a-a473-4363f0ebf021.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6f6ee481-a535-437a-a473-4363f0ebf021/storage_v2/_src_/schema/bookshopdb.HarRvg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/6f6ee481-a535-437a-a473-4363f0ebf021/storage_v2/_src_/schema/bookshopdb.HarRvg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/client.http" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/AbstractDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/AbstractDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/CategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/CategoryDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/ProductDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/ProductReviewDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/ProductReviewDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/UserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/_interface/ICategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/_interface/ICategoryDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/_interface/IGenericDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/_interface/IGenericDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/_interface/IProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/_interface/IProductDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/mapper/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/mapper/ProductMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dto/OrderItemDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dto/OrderItemDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dto/ProductDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dto/ProductDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/entities/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/entities/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/filter/ExceptionFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/filter/ExceptionFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/ProductReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/ProductReviewService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/_interface/IProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/_interface/IProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/transferObject/TProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/service/transferObject/TProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/SignIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/SignIn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/category/DeleteCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/category/DeleteCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/order/UpdateOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/order/UpdateOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/product/CreateProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/product/CreateProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/product/DeleteProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/product/DeleteProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/product/ProductManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/product/ProductManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/product/UpdateProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/product/UpdateProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/productreview/ProductReviewDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/review/ProductReviewDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/productreview/ProductReviewManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/review/ProductReviewManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/productreview/UpdateProductReview.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/review/UpdateProductReview.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/CartItemServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/CartItemServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/CartServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/CartServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/SearchServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/SearchServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/SignUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/SignUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/utils/ImageUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/utils/ImageUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/database.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/category/categoryManager.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/category/categoryManager.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/product/create.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/product/create.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/product/detail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/product/detail.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/product/update.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/product/update.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/productReview/detail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/review/detail.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/productReview/productReviewManager.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/review/productReviewManager.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/productReview/update.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/review/update.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/cart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/cart.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/home.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/productView.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/client/productView.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/common/client/footer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/common/client/footer.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/cart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/product.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +92,8 @@
         <option value="HTTP Request" />
         <option value="HTTP Public Environment File" />
         <option value="Interface" />
-        <option value="JavaScript File" />
         <option value="Jsp File" />
+        <option value="JavaScript File" />
         <option value="Class" />
       </list>
     </option>
@@ -73,10 +142,13 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Tomcat Server.webShop.executor": "Run",
+    "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
+    "jdk.selected.JAVA_MODULE": "openjdk-21",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ADMIN/IdeaProjects/LTW-BookShop",
+    "last_opened_file_path": "D:/University/2023_2024/HK1_3/web_programing/21130500-DangBaQui/BookShopWebApplication",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -115,25 +187,25 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="webShop" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.83" ALTERNATIVE_JRE_ENABLED="false">
+    <configuration name="Tomcat 9.0.76" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.76" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="BookShopWebApplication:war exploded">
           <settings>
-            <option name="CONTEXT_PATH" value="/BookShopWebApplication_war_exploded" />
+            <option name="CONTEXT_PATH" value="" />
           </settings>
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="6501614c-f5ca-4d8c-a205-40516a63f517" />
+        <option name="BASE_DIRECTORY_NAME" value="6f053506-065c-4a1b-878a-0363a816c586" />
       </server-settings>
-      <log_file alias="Tomcat Manager Log" path="%IDEA_RUN:CATALINA_BASE%/logs/manager.*" />
-      <log_file alias="Tomcat Host Manager Log" path="%IDEA_RUN:CATALINA_BASE%/logs/host-manager.*" />
-      <log_file alias="Tomcat Localhost Access Log" path="%IDEA_RUN:CATALINA_BASE%/logs/localhost_access_log.*" />
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="64378" />
+        <option name="DEBUG_PORT" value="50538" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -243,6 +315,23 @@
       <workItem from="1702314017843" duration="5207000" />
       <workItem from="1702355851296" duration="9576000" />
       <workItem from="1702365498582" duration="79000" />
+      <workItem from="1702453010594" duration="1175000" />
+      <workItem from="1702523831786" duration="223000" />
+      <workItem from="1702600880859" duration="8647000" />
+      <workItem from="1702953948033" duration="13368000" />
+      <workItem from="1703162653748" duration="16627000" />
+      <workItem from="1703212529478" duration="9066000" />
+      <workItem from="1703595930128" duration="5224000" />
+      <workItem from="1703643713062" duration="53000" />
+      <workItem from="1703644188266" duration="1996000" />
+      <workItem from="1703814740814" duration="724000" />
+      <workItem from="1704073779941" duration="13899000" />
+      <workItem from="1704162379620" duration="42789000" />
+      <workItem from="1704433009618" duration="1265000" />
+      <workItem from="1704511528903" duration="13000" />
+      <workItem from="1704715926004" duration="650000" />
+      <workItem from="1705544313688" duration="4586000" />
+      <workItem from="1705724095256" duration="3467000" />
     </task>
     <servers />
   </component>
@@ -272,15 +361,86 @@
           </properties>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/product/CreateProduct.java</url>
-          <line>58</line>
-          <option name="timeStamp" value="42" />
+        <line-breakpoint type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/SignIn.java</url>
+          <line>27</line>
+          <properties class="com.example.bookshopwebapplication.servlet.client.SignIn" method="doPost">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="66" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/product/CreateProduct.java</url>
-          <line>72</line>
-          <option name="timeStamp" value="43" />
+        <line-breakpoint type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/review/UpdateProductReview.java</url>
+          <line>20</line>
+          <properties class="com.example.bookshopwebapplication.servlet.admin.review.UpdateProductReview" method="doPost">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/dao/ProductDao.java</url>
+          <line>125</line>
+          <properties class="com.example.bookshopwebapplication.dao.ProductDao" method="getProductByFilter">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/AllProduct.java</url>
+          <line>23</line>
+          <properties class="com.example.bookshopwebapplication.servlet.client.AllProduct" method="doGet">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
+        <line-breakpoint type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/client/Checkout.java</url>
+          <line>65</line>
+          <properties class="com.example.bookshopwebapplication.servlet.client.Checkout" method="doPost">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="93" />
+        </line-breakpoint>
+        <line-breakpoint type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/product/DeleteProduct.java</url>
+          <line>23</line>
+          <properties class="com.example.bookshopwebapplication.servlet.admin.product.DeleteProduct" method="doGet">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="94" />
+        </line-breakpoint>
+        <line-breakpoint type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/category/CreateCategory.java</url>
+          <line>34</line>
+          <properties class="com.example.bookshopwebapplication.servlet.admin.category.CreateCategory" method="doPost">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="96" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/utils/ImageUtils.java</url>
+          <line>18</line>
+          <properties class="com.example.bookshopwebapplication.utils.ImageUtils" method="upload">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="98" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/bookshopwebapplication/servlet/admin/category/UpdateCategory.java</url>
+          <line>43</line>
+          <properties class="com.example.bookshopwebapplication.servlet.admin.category.UpdateCategory" method="doPost">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="99" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

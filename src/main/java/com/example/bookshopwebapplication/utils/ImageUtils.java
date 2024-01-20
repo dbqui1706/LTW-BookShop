@@ -1,10 +1,10 @@
 package com.example.bookshopwebapplication.utils;
 
-import org.jetbrains.annotations.NotNull;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -30,7 +30,7 @@ public class ImageUtils {
 
             if (filePart.getSize() != 0 && filePart.getContentType().startsWith("image")) {
                 Path targetLocation = Files.createTempFile(targetImg, "img-", ".jpg");
-                try (InputStream fileContent = filePart.getInputStream()) {
+                try (InputStream fileContent = new BufferedInputStream(filePart.getInputStream())) {
                     Files.copy(fileContent, targetLocation, StandardCopyOption.REPLACE_EXISTING);
                 }
                 imageName = Optional.of(targetLocation.getFileName().toString());
@@ -40,7 +40,8 @@ public class ImageUtils {
         }
         return imageName;
     }
-    public static void delete(@NotNull String imageName) {
+
+    public static void delete(String imageName) {
         Path imagePath = Paths.get(IMAGES_DIR).resolve(imageName).normalize();
         try {
             boolean result = Files.deleteIfExists(imagePath);

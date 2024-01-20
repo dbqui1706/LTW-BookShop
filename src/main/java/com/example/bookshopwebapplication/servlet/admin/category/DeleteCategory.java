@@ -21,21 +21,19 @@ public class DeleteCategory extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long id = Protector.of(() -> Long.parseLong(request.getParameter("id"))).get(0L);
         Optional<CategoryDto> categoryFromServer = Protector.of(() -> categoryService.getById(id)).get(Optional::empty);
-        Optional<String> action = Optional.ofNullable(request.getParameter("action"));
-        if (action.isPresent() && action.get().equals("delete")) {
-            String successMessage = String.format("Xóa thể loại #%s thành công!", id);
-            String errorMessage = String.format("Xóa thể loại #%s thất bại!", id);
-            Protector.of(() -> {
-                        categoryService.delete(new Long[]{id});
-                        Optional.ofNullable(categoryFromServer.get().getImageName()).ifPresent(ImageUtils::delete);
-                    })
-                    .done(r -> request.getSession().setAttribute("successMessage", successMessage))
-                    .fail(e -> request.getSession().setAttribute("errorMessage", errorMessage));
-        }
+        String successMessage = String.format("Xóa thể loại #%s thành công!", id);
+        String errorMessage = String.format("Xóa thể loại #%s thất bại!", id);
+        Protector.of(() -> {
+                    Optional.ofNullable(categoryFromServer.get().getImageName()).ifPresent(ImageUtils::delete);
+                    categoryService.delete(new Long[]{id});
+                })
+                .done(r -> request.getSession().setAttribute("successMessage", successMessage))
+                .fail(e -> request.getSession().setAttribute("errorMessage", errorMessage));
         response.sendRedirect(request.getContextPath() + "/admin/categoryManager");
 //        request.getRequestDispatcher("/WEB-INF/views/admin/user/categoryManager.jsp").forward(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    }
 }

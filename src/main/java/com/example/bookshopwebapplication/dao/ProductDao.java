@@ -17,29 +17,29 @@ public class ProductDao extends AbstractDao<Product> implements IProductDao {
         clearSQL();
         builderSQL.append("INSERT INTO product (name, price, discount, quantity, totalBuy, author, ");
         builderSQL.append("pages, publisher, yearPublishing, description, imageName, shop, createdAt, ");
-        builderSQL.append("updatedAt, startsAt, endsAt) ");
-        builderSQL.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        builderSQL.append("updatedAt) ");
+        builderSQL.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         return insert(builderSQL.toString(), product.getName(), product.getPrice(), product.getDiscount(),
                 product.getQuantity(), product.getTotalBuy(), product.getAuthor(), product.getPages(),
                 product.getPublisher(), product.getYearPublishing(), product.getDescription(),
-                product.getImageName(), product.getShop(), product.getCreatedAt(), product.getUpdatedAt(),
-                product.getStartsAt(), product.getEndsAt());
+                product.getImageName(), product.getShop(), product.getCreatedAt(), product.getUpdatedAt());
     }
 
     // Phương thức để cập nhật thông tin một đối tượng Product trong cơ sở dữ liệu
     public void update(Product product) {
         clearSQL();
-        builderSQL.append("UPDATE product SET name = ?, price = ?, discount = ?, quantity = ?, totalBuy = ?, author = ?, ");
-        builderSQL.append("pages = ?, publisher = ?, yearPublishing = ?, description = ?, imageName = ?, " +
-                "shop = ?, createdAt = ?, ");
-        builderSQL.append("updatedAt = ?, startsAt = ?, endsAt = ?) ");
-        builderSQL.append("WHERE id = ?");
+        builderSQL.append(
+                "UPDATE product SET name = ?, price = ?, discount = ?, quantity = ?, " +
+                        "totalBuy = ?, author = ?, pages = ?, publisher = ?, " +
+                        "yearPublishing = ?, description = ?, imageName = ?, " +
+                        "shop = ?, createdAt = ?, updatedAt = ? " +
+                        "WHERE id = ?"
+        );
         update(builderSQL.toString(), product.getName(), product.getPrice(), product.getDiscount(),
                 product.getQuantity(), product.getTotalBuy(), product.getAuthor(), product.getPages(),
                 product.getPublisher(), product.getYearPublishing(), product.getDescription(),
                 product.getImageName(), product.getShop(), product.getCreatedAt(),
-                new Timestamp(System.currentTimeMillis()), product.getStartsAt(),
-                product.getEndsAt(), product.getId());
+                new Timestamp(System.currentTimeMillis()), product.getId());
     }
 
     // Phương thức để xóa một đối tượng Product khỏi cơ sở dữ liệu theo ID
@@ -71,7 +71,8 @@ public class ProductDao extends AbstractDao<Product> implements IProductDao {
         builderSQL.append(" LIMIT " + offset + ", " + limit + "");
         return super.getOrderedPart(builderSQL.toString(), new ProductMapper());
     }
-    public int count(){
+
+    public int count() {
         clearSQL();
         builderSQL.append(
                 "SELECT COUNT(*) FROM product"
@@ -96,6 +97,39 @@ public class ProductDao extends AbstractDao<Product> implements IProductDao {
         builderSQL.append("WHERE pc.categoryId = ? ");
         builderSQL.append("AND " + filtersQuery);
         return count(builderSQL.toString(), id);
+    }
+
+    @Override
+    public int countByFilter(String filtersQuery) {
+        clearSQL();
+        builderSQL.append("SELECT COUNT(*) ");
+        builderSQL.append("FROM product_category pc ");
+        builderSQL.append("JOIN product p ON pc.productId = p.id ");
+        builderSQL.append("WHERE pc.categoryId = ? ");
+        builderSQL.append("AND " + filtersQuery);
+        return count(builderSQL.toString());
+    }
+
+    @Override
+    public String getIDByCategoriesName(String categoryNames) {
+        clearSQL();
+        builderSQL.append(
+                "SELECT pc.productId FROM product_category pc " +
+                        "JOIN category c ON pc.categoryId = c.id " +
+                        "WHERE c.name in " + categoryNames
+        );
+
+        return builderSQL.toString();
+    }
+
+    @Override
+    public List<Product> getProductByFilter(String filters) {
+        clearSQL();
+        builderSQL.append(
+                "SELECT * FROM product p WHERE " + filters
+        );
+        List<Product> products = query(builderSQL.toString(), new ProductMapper());
+        return products.isEmpty() ? new LinkedList<>() : products;
     }
 
     // Phương thức để lấy một phần danh sách Product từ cơ sở dữ liệu với sắp xếp theo các thuộc tính được chỉ định và theo ID của một danh mục
@@ -126,7 +160,19 @@ public class ProductDao extends AbstractDao<Product> implements IProductDao {
         List<Product> products = query(builderSQL.toString(), new ProductMapper(), id);
         return products.isEmpty() ? new LinkedList<Product>() : products;
     }
-
+    @Override
+    public List<Product> getOrderedPartByFilters(int limit, int offset, String orderBy, String sort, String filters){
+        clearSQL();
+        builderSQL.append(
+                "SELECT p.* " +
+                        "FROM product p " +
+                        "WHERE " + filters + " " +
+                        "ORDER BY p." + orderBy + " " + sort + " " +
+                        "LIMIT " + offset + ", " + limit
+        );
+        List<Product> products = query(builderSQL.toString(), new ProductMapper());
+        return products.isEmpty() ? new LinkedList<>() : products;
+    }
     // Phương thức để lấy danh sách các nhà xuất bản từ cơ sở dữ liệu theo ID của một danh mục
     @Override
     public List<String> getPublishersByCategoryId(Long id) {
@@ -194,6 +240,39 @@ public class ProductDao extends AbstractDao<Product> implements IProductDao {
     }
 
     @Override
+    public List<String> getPublishers() {
+        clearSQL();
+        builderSQL.append("SELECT DISTINCT(publisher) FROM product");
+        try {
+            connection = getConnection();
+            List<String> result = new LinkedList<>();
+            statement = connection.prepareStatement(builderSQL.toString());
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                result.add(resultSet.getString("publisher"));
+            }
+            return result;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            // Đảm bảo đóng các tài nguyên liên quan đến cơ sở dữ liệu
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+            } catch (SQLException e) {
+                return null;
+            }
+        }
+    }
+
+    @Override
     public int countByQuery(String query) {
         clearSQL();
         builderSQL.append(
@@ -214,5 +293,32 @@ public class ProductDao extends AbstractDao<Product> implements IProductDao {
         );
         List<Product> products = query(builderSQL.toString(), new ProductMapper(), query);
         return products.isEmpty() ? new LinkedList<>() : products;
+    }
+
+    @Override
+    public void insertProductCategory(long productId, long categoryId) {
+        clearSQL();
+        builderSQL.append(
+                "INSERT product_category (productId, categoryId) VALUES (?, ?)"
+        );
+        insertNoGenerateKey(builderSQL.toString(), productId, categoryId);
+    }
+
+    @Override
+    public void updateProductCategory(long productId, long categoryId) {
+        clearSQL();
+        builderSQL.append(
+                "UPDATE product_category SET categoryId = ? WHERE productId = ?"
+        );
+        update(builderSQL.toString(), categoryId, productId);
+    }
+
+    @Override
+    public void deleteProductCategory(long productId, long categoryId) {
+        clearSQL();
+        builderSQL.append(
+                "DELETE FROM product_category WHERE productId = ? AND categoryId = ?"
+        );
+        update(builderSQL.toString(), productId, categoryId);
     }
 }

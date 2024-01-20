@@ -51,6 +51,7 @@
                         </div>
                     </c:if>
                 </div>
+
                 <div class="mb-3">
                     <label for="product-category" class="form-label">Thể loại <span class="text-danger">*</span></label>
                     <select class="form-select ${not empty requestScope.violations.categoryViolations

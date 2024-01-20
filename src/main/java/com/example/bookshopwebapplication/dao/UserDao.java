@@ -45,7 +45,7 @@ public class UserDao extends AbstractDao<User> implements IUserDao {
         clearSQL();
         builderSQL.append("SELECT * FROM user WHERE id = ?");
         List<User> users = query(builderSQL.toString(), new UserMapper(), id);
-        return users.isEmpty() ? null : Optional.ofNullable(users.get(0));
+        return users.isEmpty() ? Optional.empty() : Optional.ofNullable(users.get(0));
     }
 
     // Phương thức để lấy một phần danh sách người dùng từ cơ sở dữ liệu
@@ -69,7 +69,7 @@ public class UserDao extends AbstractDao<User> implements IUserDao {
         clearSQL();
         builderSQL.append("SELECT * FROM user WHERE username = ?");
         List<User> users = query(builderSQL.toString(), new UserMapper(), username);
-        return users.isEmpty() ? null : Optional.ofNullable(users.get(0));
+        return users.isEmpty() ? Optional.empty() : Optional.ofNullable(users.get(0));
     }
 
     // Phương thức để thay đổi mật khẩu của người dùng dựa trên ID người dùng
@@ -86,7 +86,7 @@ public class UserDao extends AbstractDao<User> implements IUserDao {
         clearSQL();
         builderSQL.append("SELECT * FROM user WHERE email = ?");
         List<User> users = query(builderSQL.toString(), new UserMapper(), email);
-        return users.isEmpty() ? null : Optional.ofNullable(users.get(0));
+        return users.isEmpty() ? Optional.empty() : Optional.ofNullable(users.get(0));
     }
 
     // Phương thức để lấy thông tin người dùng dựa trên số điện thoại
@@ -95,7 +95,7 @@ public class UserDao extends AbstractDao<User> implements IUserDao {
         clearSQL();
         builderSQL.append("SELECT * FROM user WHERE phoneNumber = ?");
         List<User> users = query(builderSQL.toString(), new UserMapper(), phoneNumber);
-        return users.isEmpty() ? null : Optional.ofNullable(users.get(0));
+        return users.isEmpty() ? Optional.empty() : Optional.ofNullable(users.get(0));
     }
 
     @Override

@@ -87,8 +87,12 @@ public class CategoryService implements ICategoryService {
     }
 
     // Phương thức để lấy danh sách tất cả các loại
-    public List<Category> getAll() {
-        return categoryDao.findAll();
+    public List<CategoryDto> getAll() {
+        return categoryDao.getAll().stream()
+                .map(category -> getById(category.getId()))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toList());
     }
 
     // Phương thức để lấy đối tượng CategoryDto dựa trên id sản phẩm

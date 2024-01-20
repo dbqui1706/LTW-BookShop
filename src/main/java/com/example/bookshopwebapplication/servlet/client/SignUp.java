@@ -1,28 +1,30 @@
 package com.example.bookshopwebapplication.servlet.client;
 
 import com.example.bookshopwebapplication.dto.UserDto;
-import com.example.bookshopwebapplication.entities.User;
 import com.example.bookshopwebapplication.service.UserService;
 import com.example.bookshopwebapplication.utils.EncodePassword;
+import com.example.bookshopwebapplication.utils.Protector;
 import com.example.bookshopwebapplication.utils.Validator;
+import com.example.bookshopwebapplication.utils.mail.EmailUtils;
+import com.example.bookshopwebapplication.utils.mail.VerificationToken;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.net.URI;
+import java.util.*;
 
 @WebServlet("/signup")
 public class SignUp extends HttpServlet {
     private final UserService userService = new UserService();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/client/signup.jsp").forward(request,response);
+        request.getRequestDispatcher("/WEB-INF/views/client/signup.jsp").forward(request, response);
     }
 
     @Override
@@ -41,13 +43,12 @@ public class SignUp extends HttpServlet {
         values.put("policy", request.getParameter("policy"));
 
         // Kiểm tra các parameter, lưu các vi phạm (nếu có) vào map violations
-        Optional<UserDto> userFromServer = userService.getByUsername(values.get("username"));
         violations.put("usernameViolations", Validator.of(values.get("username"))
                 .isNotNullAndEmpty()
                 .isNotBlankAtBothEnds()
                 .isAtMostOfLength(25)
                 .isNotExistent(userService.getAllUsername().contains(values.get("username"))
-                        ? false : true, "Tên đăng nhập")
+                        ? true : false, "Tên đăng nhập")
                 .toList());
         violations.put("passwordViolations", Validator.of(values.get("password"))
                 .isNotNullAndEmpty()
@@ -81,8 +82,7 @@ public class SignUp extends HttpServlet {
 
         // Tính tổng các vi phạm sau kiểm tra (nếu có)
         sumOfViolations = violations.values().stream().mapToInt(List::size).sum();
-        String successMessage = "Đã đăng ký thành công!";
-        String errorMessage = "Đã có lỗi truy vấn!";
+
 
         // Khi không có vi phạm trong kiểm tra các parameter
         if (sumOfViolations == 0) {
@@ -97,17 +97,22 @@ public class SignUp extends HttpServlet {
                     values.get("address"),
                     "CUSTOMER"
             );
-            Optional<UserDto> userSignUp = userService.insert(user);
-            if (userSignUp.isPresent()) {
-                request.setAttribute("successMessage", successMessage);
-            } else {
-                request.setAttribute("errorMessage", errorMessage);
-            }
+
+            // save user sign up to session
+            request.getSession().setAttribute("userSignUp", user);
+
+            // send email
+            EmailUtils.sendEmail(user, UUID.randomUUID().toString());
+
+            String messageEmail = "Vui lòng xác thực gmail để hoàn thành đăng ký";
+            request.setAttribute("sentEmail", messageEmail);
+
+            request.getRequestDispatcher("/WEB-INF/views/client/verifyEmail.jsp").forward(request, response);
         } else {
             // Khi có vi phạm
             request.setAttribute("values", values);
             request.setAttribute("violations", violations);
+            request.getRequestDispatcher("/WEB-INF/views/client/signup.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("/WEB-INF/views/client/signin.jsp").forward(request, response);
     }
 }

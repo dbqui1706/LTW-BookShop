@@ -8,6 +8,7 @@ import lombok.ToString;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
+
 @Data
 @NoArgsConstructor
 @ToString
@@ -27,25 +28,22 @@ public class ProductDto {
     private Integer shop;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    private Timestamp startsAt;
-    private Timestamp endsAt;
+
     public ProductDto(Long id,
-                   String name,
-                   Double price,
-                   Double discount,
-                   Integer quantity,
-                   Integer totalBuy,
-                   String author,
-                   Integer pages,
-                   String publisher,
-                   Integer yearPublishing,
-                   String description,
-                   String imageName,
-                   Integer shop,
-                   Timestamp createdAt,
-                   Timestamp updatedAt,
-                   Timestamp startsAt,
-                   Timestamp endsAt) {
+                      String name,
+                      Double price,
+                      Double discount,
+                      Integer quantity,
+                      Integer totalBuy,
+                      String author,
+                      Integer pages,
+                      String publisher,
+                      Integer yearPublishing,
+                      String description,
+                      String imageName,
+                      Integer shop,
+                      Timestamp createdAt,
+                      Timestamp updatedAt) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -61,7 +59,5 @@ public class ProductDto {
         this.shop = shop;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.startsAt = startsAt;
-        this.endsAt = endsAt;
     }
 }

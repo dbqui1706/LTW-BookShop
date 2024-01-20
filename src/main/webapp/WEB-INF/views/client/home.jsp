@@ -9,6 +9,8 @@
     <%--    <%@include file="/common/meta.jsp"%>--%>
     <jsp:include page="/common/meta.jsp"/>
     <title>Trang chủ</title>
+
+    <script src="${pageContext.request.contextPath}/js/toast.js" type="module"></script>
 </head>
 
 <body>
@@ -18,7 +20,8 @@
     <div class="container">
         <header class="section-heading py-4 d-flex justify-content-between">
             <h3 class="section-title">Danh mục sản phẩm</h3>
-            <a class="btn btn-secondary" href="<c:url value="/?category=all"/>" role="button" style="height: fit-content;">
+            <a class="btn btn-secondary" href="<c:url value="/?category=all"/>" role="button"
+               style="height: fit-content;">
                 Xem tất cả
             </a>
         </header> <!-- section-heading.// -->
@@ -59,7 +62,8 @@
     <div class="container">
         <header class="section-heading py-4 d-flex justify-content-between">
             <h3 class="section-title">Sản phẩm mới nhất</h3>
-            <a class="btn btn-secondary" href="<c:url value="/?product=all"/>" role="button" style="height: fit-content;">Xem tất cả</a>
+            <a class="btn btn-secondary" href="<c:url value="/products"/>" role="button" style="height: fit-content;">Xem
+                tất cả</a>
         </header> <!-- section-heading.// -->
         <div class="row item-grid">
             <c:forEach var="product" items="${requestScope.products}">
@@ -119,6 +123,8 @@
 </section> <!-- section-content.// -->
 
 <jsp:include page="/common/client/footer.jsp"/>
+
+<div class="toast-container position-fixed bottom-0 start-0 p-3"></div> <!-- toast-container.// -->
 </body>
 
 </html>

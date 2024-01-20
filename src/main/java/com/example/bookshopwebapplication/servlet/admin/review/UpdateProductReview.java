@@ -1,4 +1,4 @@
-package com.example.bookshopwebapplication.servlet.admin.productreview;
+package com.example.bookshopwebapplication.servlet.admin.review;
 
 import com.example.bookshopwebapplication.service.ProductReviewService;
 import com.example.bookshopwebapplication.utils.Protector;

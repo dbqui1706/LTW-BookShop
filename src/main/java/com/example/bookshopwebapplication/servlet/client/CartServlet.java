@@ -46,8 +46,8 @@ public class CartServlet extends HttpServlet {
         OrderDto order = new OrderDto();
         order.setUser((UserDto) request.getSession().getAttribute("currentUser"));
         order.setStatus(1);
-        order.setDeliveryMethod(order.getDeliveryMethod());
-        order.setDeliveryPrice(order.getDeliveryPrice());
+        order.setDeliveryMethod(orderRequest.getDeliveryMethod());
+        order.setDeliveryPrice(orderRequest.getDeliveryPrice());
         order.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 
         long orderId = orderService.insert(order).get().getId();

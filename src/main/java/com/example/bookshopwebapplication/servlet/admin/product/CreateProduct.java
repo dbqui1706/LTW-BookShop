@@ -39,17 +39,7 @@ public class CreateProduct extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int totalCategories = Protector.of(categoryService::count).get(0);
-
-        String pageParam = Optional.ofNullable(request.getParameter("page")).orElse("1");
-        int page = Protector.of(() -> Integer.parseInt(pageParam)).get(1);
-
-//        int totalPages = Paging.totalPages(totalCategories, CATEGORIES_PER_PAGE);
-        int offset = Paging.offset(page, totalCategories, CATEGORIES_PER_PAGE);
-//        List<Category> categories = Protector.of(categoryService::getAll).get(ArrayList::new);
-        List<CategoryDto> categories = Protector.of(() -> categoryService.getOrderedPart(
-                CATEGORIES_PER_PAGE, offset, "id", "DESC"
-        )).get(ArrayList::new);
+        List<CategoryDto> categories = Protector.of(categoryService::getAll).get(ArrayList::new);
         request.setAttribute("categories", categories);
         request.getRequestDispatcher("/WEB-INF/views/admin/product/create.jsp").forward(request, response);
     }
@@ -69,16 +59,7 @@ public class CreateProduct extends HttpServlet {
         product.setDescription(request.getParameter("description").trim().isEmpty()
                 ? null : request.getParameter("description"));
         product.setShop(Protector.of(() -> Integer.parseInt(request.getParameter("shop"))).get(1));
-//        product.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
         product.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-        product.setStartsAt(request.getParameter("startsAt").trim().isEmpty()
-                ? null : Timestamp.valueOf(LocalDateTime.parse(request.getParameter("startsAt"))));
-        product.setEndsAt(request.getParameter("endsAt").trim().isEmpty()
-                ? null : Timestamp.valueOf(LocalDateTime.parse(request.getParameter("endsAt"))));
-//        product.setStartsAt(request.getParameter("startsAt").trim().isEmpty()
-//                ? null : Timestamp.valueOf((request.getParameter("startsAt"))));
-//        product.setEndsAt(request.getParameter("endsAt").trim().isEmpty()
-//                ? null : Timestamp.valueOf((request.getParameter("endsAt"))));
 
         long categoryId = Protector.of(() -> Long.parseLong(request.getParameter("category"))).get(0L);
 
@@ -140,30 +121,22 @@ public class CreateProduct extends HttpServlet {
 
         if (sumOfViolations == 0) {
             ImageUtils.upload(request).ifPresent(product::setImageName);
-            Protector.of(() ->
-                        productService.insert(product)
-//                        productService.insertProductCategory(productId, categoryId);
-                    )
+            Protector.of(() -> {
+                        long productId = productService.insert(product).get().getId();
+                        productService.insertProductCategory(productId, categoryId);
+                    })
                     .done(r -> request.setAttribute("successMessage", successMessage))
                     .fail(e -> {
                         request.setAttribute("product", product);
-//                        request.setAttribute("categoryId", categoryId);
+                        request.setAttribute("categoryId", categoryId);
                         request.setAttribute("errorMessage", errorMessage);
                     });
         } else {
             request.setAttribute("product", product);
-//            request.setAttribute("categoryId", categoryId);
             request.setAttribute("violations", violations);
         }
 
-        int totalCategories = Protector.of(categoryService::count).get(0);
-        String pageParam = Optional.ofNullable(request.getParameter("page")).orElse("1");
-        int page = Protector.of(() -> Integer.parseInt(pageParam)).get(1);
-//        int totalPages = Paging.totalPages(totalCategories, CATEGORIES_PER_PAGE);
-        int offset = Paging.offset(page, totalCategories, CATEGORIES_PER_PAGE);
-        List<CategoryDto> categories = Protector.of(() -> categoryService.getOrderedPart(
-                CATEGORIES_PER_PAGE, offset, "id", "DESC"
-        )).get(ArrayList::new);
+        List<CategoryDto> categories = Protector.of(() -> categoryService.getAll()).get(ArrayList::new);
         request.setAttribute("categories", categories);
         request.getRequestDispatcher("/WEB-INF/views/admin/product/create.jsp").forward(request, response);
     }

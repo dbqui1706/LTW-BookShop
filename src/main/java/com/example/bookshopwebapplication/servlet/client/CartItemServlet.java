@@ -153,8 +153,10 @@ public class CartItemServlet extends HttpServlet {
         CartItemRequest cartItemRequest = JsonUtils.get(request, CartItemRequest.class);
 
         long cartItemId = Protector.of(() -> Long.parseLong(request.getParameter("cartItemId"))).get(0L);
-        Optional<CartItemDto> cartItemFromServer = Protector.of(() -> cartItemService.getById(cartItemId)).get(Optional::empty);
-        cartItemFromServer.get().setCart(CartService.getInstance().getById(cartId).get());
+
+        Optional<CartItemDto> cartItemDto = Protector.of(() -> cartItemService.getById(cartItemId)).get(Optional::empty);
+        cartItemDto.get().setCart(CartService.getInstance().getById(cartId).get());
+
         String successMessage = "Đã cập nhật số lượng của sản phẩm thành công!";
         String errorMessage = "Đã có lỗi truy vấn!";
 
@@ -167,8 +169,9 @@ public class CartItemServlet extends HttpServlet {
                 new Message(404, errorMessage),
                 HttpServletResponse.SC_NOT_FOUND);
 
-        if (cartItemId > 0L && cartItemFromServer.isPresent()) {
-            Protector.of(() -> cartItemService.update(cartItemFromServer.get()))
+        if (cartItemId > 0L && cartItemDto.isPresent()) {
+            cartItemDto.get().setQuantity(cartItemRequest.getQuantity());
+            Protector.of(() -> cartItemService.update(cartItemDto.get()))
                     .done(r -> doneFunction.run())
                     .fail(e -> failFunction.run());
         } else {

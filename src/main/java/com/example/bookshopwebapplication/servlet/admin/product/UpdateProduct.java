@@ -11,7 +11,6 @@ import com.example.bookshopwebapplication.utils.Protector;
 import com.example.bookshopwebapplication.utils.Validator;
 
 
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -44,25 +43,18 @@ public class UpdateProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long id = Protector.of(() -> Long.parseLong(request.getParameter("id"))).get(0L);
-        Optional<ProductDto> productFromServer = Protector.of(() -> productService.getById(id)).get(Optional::empty);
+        Optional<ProductDto> product = Protector.of(() -> productService.getById(id)).get(Optional::empty);
 
-        if (productFromServer.isPresent()) {
-            int totalCategories = Protector.of(categoryService::count).get(0);
+        if (product.isPresent()) {
 
-            String pageParam = Optional.ofNullable(request.getParameter("page")).orElse("1");
-            int page = Protector.of(() -> Integer.parseInt(pageParam)).get(1);
+            List<CategoryDto> categories = Protector.of(categoryService::getAll).get(ArrayList::new);
 
-//            int totalPages = Paging.totalPages(totalCategories, CATEGORIES_PER_PAGE);
-            int offset = Paging.offset(page, totalCategories, CATEGORIES_PER_PAGE);
-//            List<CategoryDto> categories = Protector.of(categoryService::getAll).get(ArrayList::new);
-            List<CategoryDto> categories = Protector.of(() -> categoryService.getOrderedPart(
-                    CATEGORIES_PER_PAGE, offset, "id", "DESC"
-            )).get(ArrayList::new);
-            Optional<CategoryDto> categoryFromServer = Protector.of(() -> categoryService.getByProductId(id)).get(Optional::empty);
+            Optional<CategoryDto> categoryDto = Protector.of(() -> categoryService.getByProductId(id)).get(Optional::empty);
 
-            request.setAttribute("product", productFromServer.get());
+            request.setAttribute("product", product.get());
             request.setAttribute("categories", categories);
-            categoryFromServer.ifPresent(category -> request.setAttribute("categoryId", category.getId()));
+            categoryDto.ifPresent(category -> request.setAttribute("categoryID", category.getId()));
+            request.setAttribute("categoryName", categoryDto.get().getName());
             request.getRequestDispatcher("/WEB-INF/views/admin/product/update.jsp").forward(request, response);
         } else {
             response.sendRedirect(request.getContextPath() + "/admin/productManager");
@@ -87,11 +79,8 @@ public class UpdateProduct extends HttpServlet {
         product.setImageName(request.getParameter("imageName").trim().isEmpty()
                 ? null : request.getParameter("imageName"));
         product.setShop(Protector.of(() -> Integer.parseInt(request.getParameter("shop"))).get(1));
+        product.setCreatedAt(productService.getById(product.getId()).get().getCreatedAt());
         product.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
-        product.setStartsAt(request.getParameter("startsAt").trim().isEmpty()
-                ? null : Timestamp.valueOf(LocalDateTime.parse(request.getParameter("startsAt"))));
-        product.setEndsAt(request.getParameter("endsAt").trim().isEmpty()
-                ? null : Timestamp.valueOf(LocalDateTime.parse(request.getParameter("endsAt"))));
 
         long categoryId = Protector.of(() -> Long.parseLong(request.getParameter("category"))).get(0L);
         String deleteImage = request.getParameter("deleteImage");
@@ -167,35 +156,24 @@ public class UpdateProduct extends HttpServlet {
                 ImageUtils.upload(request).ifPresent(product::setImageName);
             }
 
-            Optional<CategoryDto> categoryFromServer = Protector.of(() -> categoryService.getByProductId(product.getId()))
+            Optional<CategoryDto> category = Protector.of(() -> categoryService.getByProductId(product.getId()))
                     .get(Optional::empty);
-
-            Protector.of(() -> {
-                        productService.update(product);
-                        if (categoryFromServer.isPresent()) {
-                            productService.update(product);
-                        } else {
-                            productService.insert(product);
-                        }
-                    })
-                    .done(r -> request.getSession().setAttribute("successMessage", successMessage))
-                    .fail(e -> request.getSession().setAttribute("errorMessage", errorMessage));
+            productService.update(product);
+            if (category.isPresent()) {
+                productService.updateProductCategory(product.getId(), categoryId);
+            } else {
+                productService.insertProductCategory(product.getId(), categoryId);
+            }
+//                    .done(r -> request.getSession().setAttribute("successMessage", successMessage))
+//                    .fail(e -> request.getSession().setAttribute("errorMessage", errorMessage));
         } else {
             request.getSession().setAttribute("violations", violations);
             request.getSession().setAttribute("deleteImage", deleteImage);
         }
-        int totalCategories = Protector.of(categoryService::count).get(0);
-        String pageParam = Optional.ofNullable(request.getParameter("page")).orElse("1");
-        int page = Protector.of(() -> Integer.parseInt(pageParam)).get(1);
-//        int totalPages = Paging.totalPages(totalCategories, CATEGORIES_PER_PAGE);
-        int offset = Paging.offset(page, totalCategories, CATEGORIES_PER_PAGE);
-//        List<Category> categories = Protector.of(categoryService::getAll).get(ArrayList::new);
-        List<CategoryDto> categories = Protector.of(() -> categoryService.getOrderedPart(
-                CATEGORIES_PER_PAGE, offset, "id", "DESC"
-        )).get(ArrayList::new);
+        List<CategoryDto> categories = Protector.of(categoryService::getAll).get(ArrayList::new);
         request.setAttribute("product", product);
         request.setAttribute("categories", categories);
         request.setAttribute("categoryId", categoryId);
-        request.getRequestDispatcher("/WEB-INF/views/admin/product/update.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/admin/productManager/update");
     }
 }

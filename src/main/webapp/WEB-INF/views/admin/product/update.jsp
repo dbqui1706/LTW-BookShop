@@ -20,7 +20,7 @@
         </header> <!-- section-heading.// -->
 
         <main class="row mb-5">
-            <form class="col-lg-6" method="POST" action="${pageContext.request.contextPath}/admin/productManager/update"
+            <form class="col-lg-6" method="post" action="<c:url value="/admin/productManager/update"/>"
                   enctype="multipart/form-data">
                 <c:if test="${not empty requestScope.successMessage}">
                     <div class="alert alert-success mb-3" role="alert">
@@ -58,11 +58,11 @@
                             id="product-category"
                             name="category"
                             required>
-                        <option ${empty requestScope.categoryId || requestScope.categoryId == 0 ? 'selected' : ''} disabled>
-                            Chọn một thể loại...
+                        <option selected>
+                            ${categoryName}
                         </option>
                         <c:forEach var="category" items="${requestScope.categories}">
-                            <option value="${category.id}" ${requestScope.categoryId == category.id ? 'selected' : ''}>
+                            <option value="${category.id}" ${requestScope.categoryID == category.id ? 'selected' : ''}>
                                     ${category.name}
                             </option>
                         </c:forEach>
@@ -86,8 +86,6 @@
                                id="product-price"
                                name="price"
                                value="${requestScope.product.price}"
-                               min="0"
-                               step="500"
                                required>
                         <span class="input-group-text">₫</span>
                         <c:if test="${not empty requestScope.violations.priceViolations}">
@@ -322,42 +320,42 @@
                         </div>
                     </c:if>
                 </div>
-                <div class="mb-3">
-                    <label for="product-startsAt" class="form-label">Ngày bắt đầu khuyến mãi</label>
-                    <input type="datetime-local"
-                           class="form-control ${not empty requestScope.violations.startsAtViolations
-                   ? 'is-invalid' : (not empty requestScope.product.startsAt ? 'is-valid' : '')}"
-                           id="product-startsAt"
-                           name="startsAt"
-                           value="${requestScope.product.startsAt}">
-                    <c:if test="${not empty requestScope.violations.startsAtViolations}">
-                        <div class="invalid-feedback">
-                            <ul class="list-unstyled">
-                                <c:forEach var="violation" items="${requestScope.violations.startsAtViolations}">
-                                    <li>${violation}</li>
-                                </c:forEach>
-                            </ul>
-                        </div>
-                    </c:if>
-                </div>
-                <div class="mb-3">
-                    <label for="product-endsAt" class="form-label">Ngày kết thúc khuyến mãi</label>
-                    <input type="datetime-local"
-                           class="form-control ${not empty requestScope.violations.endsAtViolations
-                   ? 'is-invalid' : (not empty requestScope.product.endsAt ? 'is-valid' : '')}"
-                           id="product-endsAt"
-                           name="endsAt"
-                           value="${requestScope.product.endsAt}">
-                    <c:if test="${not empty requestScope.violations.endsAtViolations}">
-                        <div class="invalid-feedback">
-                            <ul class="list-unstyled">
-                                <c:forEach var="violation" items="${requestScope.violations.endsAtViolations}">
-                                    <li>${violation}</li>
-                                </c:forEach>
-                            </ul>
-                        </div>
-                    </c:if>
-                </div>
+<%--                <div class="mb-3">--%>
+<%--                    <label for="product-startsAt" class="form-label">Ngày bắt đầu khuyến mãi</label>--%>
+<%--                    <input type="datetime-local"--%>
+<%--                           class="form-control ${not empty requestScope.violations.startsAtViolations--%>
+<%--                   ? 'is-invalid' : (not empty requestScope.product.startsAt ? 'is-valid' : '')}"--%>
+<%--                           id="product-startsAt"--%>
+<%--                           name="startsAt"--%>
+<%--                           value="${requestScope.product.startsAt}">--%>
+<%--                    <c:if test="${not empty requestScope.violations.startsAtViolations}">--%>
+<%--                        <div class="invalid-feedback">--%>
+<%--                            <ul class="list-unstyled">--%>
+<%--                                <c:forEach var="violation" items="${requestScope.violations.startsAtViolations}">--%>
+<%--                                    <li>${violation}</li>--%>
+<%--                                </c:forEach>--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
+<%--                    </c:if>--%>
+<%--                </div>--%>
+<%--                <div class="mb-3">--%>
+<%--                    <label for="product-endsAt" class="form-label">Ngày kết thúc khuyến mãi</label>--%>
+<%--                    <input type="datetime-local"--%>
+<%--                           class="form-control ${not empty requestScope.violations.endsAtViolations--%>
+<%--                   ? 'is-invalid' : (not empty requestScope.product.endsAt ? 'is-valid' : '')}"--%>
+<%--                           id="product-endsAt"--%>
+<%--                           name="endsAt"--%>
+<%--                           value="${requestScope.product.endsAt}">--%>
+<%--                    <c:if test="${not empty requestScope.violations.endsAtViolations}">--%>
+<%--                        <div class="invalid-feedback">--%>
+<%--                            <ul class="list-unstyled">--%>
+<%--                                <c:forEach var="violation" items="${requestScope.violations.endsAtViolations}">--%>
+<%--                                    <li>${violation}</li>--%>
+<%--                                </c:forEach>--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
+<%--                    </c:if>--%>
+<%--                </div>--%>
                 <input type="hidden" name="id" value="${requestScope.product.id}">
                 <input type="hidden" name="imageName" value="${requestScope.product.imageName}">
                 <button type="submit" class="btn btn-primary me-2 mb-3">

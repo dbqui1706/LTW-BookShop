@@ -2,6 +2,7 @@ package com.example.bookshopwebapplication.servlet.client;
 
 import com.example.bookshopwebapplication.dto.ProductDto;
 import com.example.bookshopwebapplication.service.ProductService;
+import com.example.bookshopwebapplication.utils.Paging;
 import com.example.bookshopwebapplication.utils.Protector;
 
 import javax.servlet.ServletException;
@@ -26,17 +27,14 @@ public class SearchServlet extends HttpServlet {
 
         if (query.isPresent()) {
             String queryStr = query.get();
+            System.out.println(queryStr);
 
             int totalProducts = Protector.of(() -> productService.countByQuery(queryStr)).get(0);
-            int totalPages = totalProducts / PRODUCTS_PER_PAGE + (totalProducts % PRODUCTS_PER_PAGE != 0 ? 1 : 0);
-
             String pageParam = Optional.ofNullable(request.getParameter("page")).orElse("1");
             int page = Protector.of(() -> Integer.parseInt(pageParam)).get(1);
-            if (page < 1 || page > totalPages) {
-                page = 1;
-            }
 
-            int offset = (page - 1) * PRODUCTS_PER_PAGE;
+            int totalPages = Paging.totalPages(totalProducts, PRODUCTS_PER_PAGE);
+            int offset = Paging.offset(page, totalProducts, PRODUCTS_PER_PAGE);
 
             List<ProductDto> products = Protector.of(() -> productService.getByQuery(
                     queryStr, PRODUCTS_PER_PAGE, offset

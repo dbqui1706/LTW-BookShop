@@ -11,7 +11,6 @@ public interface IGenericDao<T> {
     void update(String sql, Object... parameters);
 
     Long insert(String sql, Object... parameters);
-
     Optional<T> getById(String sql, IRowMapper<T> rowMapper, Object... parameters);
 
     List<T> getAll(String sql, IRowMapper<T> mapper, Object... parameters);
