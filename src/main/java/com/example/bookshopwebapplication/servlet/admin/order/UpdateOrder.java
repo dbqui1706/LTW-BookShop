@@ -50,14 +50,12 @@ public class UpdateOrder extends HttpServlet {
             }
 
         }
-
         if ("CANCEL".equals(action)) {
             String successMessage = String.format("Đã hủy đơn hàng #%s thành công!", id);
             Protector.of(() -> orderService.cancel(id))
                     .done(r -> request.getSession().setAttribute("successMessage", successMessage))
                     .fail(e -> request.getSession().setAttribute("errorMessage", errorMessage));
         }
-
         if ("RESET".equals(action)) {
             String successMessage = String.format("Đã đặt lại trạng thái là đang giao hàng cho đơn hàng #%s thành công!", id);
             Protector.of(() -> orderService.reset(id))
