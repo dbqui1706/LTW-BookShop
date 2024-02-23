@@ -27,7 +27,7 @@
                                     <h6 class="title fw-bold">Thể loại</h6>
                                 </a>
                             </header>
-                            <div class="filter-content collapse show" id="collapse_1">
+                            <div class="filter-content collapse" id="collapse_1">
                                 <div class="card-body pt-0">
                                     <c:forEach var="category" items="${requestScope.categories}" varStatus="status">
                                         <div class="form-check">
@@ -50,7 +50,7 @@
                                     <h6 class="title fw-bold">Nhà xuất bản</h6>
                                 </a>
                             </header>
-                            <div class="filter-content collapse show" id="collapse_2">
+                            <div class="filter-content collapse" id="collapse_2">
                                 <div class="card-body pt-0">
                                     <c:choose>
                                         <c:when test="${not empty requestScope.publishers}">
@@ -80,7 +80,7 @@
                                     <h6 class="title fw-bold">Giá bán</h6>
                                 </a>
                             </header>
-                            <div class="filter-content collapse show" id="collapse_3">
+                            <div class="filter-content collapse" id="collapse_3">
                                 <div class="card-body pt-0">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="0-50000"

@@ -145,11 +145,11 @@ public class UpdateProduct extends HttpServlet {
             if (product.getImageName() != null) {
                 String currentImageName = product.getImageName();
                 if (deleteImage != null) {
-                    ImageUtils.delete(currentImageName);
+                    ImageUtils.delete(currentImageName, request);
                     product.setImageName(null);
                 }
                 ImageUtils.upload(request).ifPresent(imageName -> {
-                    ImageUtils.delete(currentImageName);
+                    ImageUtils.delete(currentImageName, request);
                     product.setImageName(imageName);
                 });
             } else {

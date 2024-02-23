@@ -68,7 +68,6 @@ public class OrderManager extends HttpServlet {
                 totalPrice += (orderItem.getPrice() * (100 - orderItem.getDiscount()) / 100) * orderItem.getQuantity();
             }
         }
-
         return totalPrice;
     }
 }

@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 @Data
 @ToString
 @NoArgsConstructor
-public class ProductReviewDto {
+public class ProductReviewDto extends OrderItemDto {
     private Long id;
     private Integer ratingScore;
     private String content;

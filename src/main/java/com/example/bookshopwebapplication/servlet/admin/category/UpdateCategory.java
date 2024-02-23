@@ -70,11 +70,11 @@ public class UpdateCategory extends HttpServlet {
             if (category.getImageName() != null) {
                 String currentImageName = category.getImageName();
                 if (deleteImage != null) {
-                    ImageUtils.delete(currentImageName);
+                    ImageUtils.delete(currentImageName, request);
                     category.setImageName(null);
                 }
                 ImageUtils.upload(request).ifPresent(imageName -> {
-                    ImageUtils.delete(currentImageName);
+                    ImageUtils.delete(currentImageName, request);
                     category.setImageName(imageName);
                 });
             } else {

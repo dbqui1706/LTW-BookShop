@@ -7,7 +7,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import java.io.BufferedInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,7 +16,6 @@ import java.util.Optional;
 
 public class ImageUtils {
     private static final String IMAGES_DIR = "/image";
-
     public static Optional<String> upload(HttpServletRequest request) {
         Optional<String> imageName = Optional.empty();
         try {
@@ -44,8 +42,9 @@ public class ImageUtils {
     }
 
     @SneakyThrows
-    public static void delete(String imageName) {
-        Path imagePath = Paths.get(IMAGES_DIR).resolve(imageName).normalize();
+    public static void delete(String imageName, HttpServletRequest request) {
+        Path imagePath = Paths.get(request.getServletContext().getRealPath(IMAGES_DIR))
+                .resolve(imageName).normalize();
         boolean result = Files.deleteIfExists(imagePath);
         if (result) {
             System.out.println("File is deleted: " + imageName);

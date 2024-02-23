@@ -29,11 +29,12 @@ public class DeleteProduct extends HttpServlet {
             String successMessage = String.format("Xóa sản phẩm #%s thành công!", id);
             String errorMessage = String.format("Xóa sản phẩm #%s thất bại!", id);
 
-            Optional<CategoryDto> categoryFromServer = Protector.of(() -> categoryService.getByProductId(id)).get(Optional::empty);
-
             Protector.of(() -> {
                         productService.delete(new Long[]{id});
-                        Optional.ofNullable(productFromServer.get().getImageName()).ifPresent(ImageUtils::delete);
+                        Optional<String> image = Optional.ofNullable(productFromServer.get().getImageName());
+                        if (image.isPresent()) {
+                            ImageUtils.delete(image.get(), request);
+                        }
                     })
                     .done(r -> request.getSession().setAttribute("successMessage", successMessage))
                     .fail(e -> request.getSession().setAttribute("errorMessage", errorMessage));
@@ -43,5 +44,6 @@ public class DeleteProduct extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    }
 }

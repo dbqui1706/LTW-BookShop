@@ -14,7 +14,7 @@
                         <div class="input-group w-100">
                             <input type="text"
                                    class="form-control"
-                                   placeholder="Nhập từ khóa cần tìm ..."
+                                   placeholder="Nhập tên sản phẩm cần tìm ..."
                                    name="q"
                                    value="${requestScope.query}">
                             <button class="btn btn-primary" type="submit">

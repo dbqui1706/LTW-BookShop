@@ -24,7 +24,8 @@ public class DeleteCategory extends HttpServlet {
         String successMessage = String.format("Xóa thể loại #%s thành công!", id);
         String errorMessage = String.format("Xóa thể loại #%s thất bại!", id);
         Protector.of(() -> {
-                    Optional.ofNullable(categoryFromServer.get().getImageName()).ifPresent(ImageUtils::delete);
+                    Optional.ofNullable(categoryFromServer.get()
+                            .getImageName()).ifPresent(s -> ImageUtils.delete(s, request));
                     categoryService.delete(new Long[]{id});
                 })
                 .done(r -> request.getSession().setAttribute("successMessage", successMessage))

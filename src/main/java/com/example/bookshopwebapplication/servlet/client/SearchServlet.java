@@ -27,7 +27,6 @@ public class SearchServlet extends HttpServlet {
 
         if (query.isPresent()) {
             String queryStr = query.get();
-            System.out.println(queryStr);
 
             int totalProducts = Protector.of(() -> productService.countByQuery(queryStr)).get(0);
             String pageParam = Optional.ofNullable(request.getParameter("page")).orElse("1");
